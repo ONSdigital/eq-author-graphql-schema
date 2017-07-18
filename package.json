@@ -1,0 +1,9 @@
+{
+  "name": "eq-author-graphql-schema",
+  "version": "1.0.0",
+  "description": "The GraphQL schema for the eq-author application.",
+  "main": "index.js",
+  "repository": "git@github.com:ONSdigital/eq-author-graphql-schema.git",
+  "author": "Samiwel Thomas <samiwel.thomas@gmail.com>",
+  "license": "MIT"
+}
