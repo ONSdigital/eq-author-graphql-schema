@@ -1,4 +1,4 @@
-type Questionnaire {
+module.exports = `type Questionnaire {
     id: Int
     title: String
     description: String
@@ -91,6 +91,7 @@ type Query {
 }
 
 type Mutation {
+    # creates a Questionnaire along with an initial Section and Page
     createQuestionnaire(title: String!, description: String, theme: String!, legalBasis: LegalBasis!, navigation: Boolean, surveyId: String!) : Questionnaire
     updateQuestionnaire(id: Int!, title: String, description: String, theme: String, legalBasis: LegalBasis, navigation: Boolean, surveyId: String) : Questionnaire
     deleteQuestionnaire(id: Int!) : Questionnaire
@@ -98,7 +99,6 @@ type Mutation {
     createSection(title: String!, description: String, questionnaireId: Int!) : Section
     updateSection(id: Int!, title: String, description: String) : Section
     deleteSection(id: Int!) : Section
-
     createGroup(title: String!, description: String, questionnaireId: Int!) : Section @deprecated(reason: "use 'createSection' instead")
     updateGroup(id: Int!, title: String, description: String) : Section @deprecated(reason: "use 'updateSection' instead")
     deleteGroup(id: Int!) : Section @deprecated(reason: "use 'deleteSection' instead")
@@ -115,3 +115,4 @@ type Mutation {
     updateAnswer(id: Int!, description: String, guidance: String, label: String, qCode: String, type: AnswerType, mandatory: Boolean) : Answer
     deleteAnswer(id: Int!) : Answer
 }
+`;
