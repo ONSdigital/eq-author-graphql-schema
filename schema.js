@@ -2,7 +2,7 @@ module.exports = `type Questionnaire {
     id: Int
     title: String
     description: String
-    theme: String
+    theme: Theme
     legalBasis: LegalBasis
     navigation: Boolean
     surveyId: String
