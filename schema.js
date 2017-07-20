@@ -80,6 +80,11 @@ enum LegalBasis {
     StatisticsOfTradeAct
 }
 
+enum Theme {
+    default
+    census
+}
+
 type Query {
     questionnaires: [Questionnaire]
     questionnaire(id: Int!): Questionnaire
