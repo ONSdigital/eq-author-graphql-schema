@@ -2,7 +2,7 @@ module.exports = `type Questionnaire {
     id: Int
     title: String
     description: String
-    theme: String
+    theme: Theme
     legalBasis: LegalBasis
     navigation: Boolean
     surveyId: String
@@ -78,6 +78,11 @@ enum AnswerType {
 enum LegalBasis {
     Voluntary
     StatisticsOfTradeAct
+}
+
+enum Theme {
+    default
+    census
 }
 
 type Query {
