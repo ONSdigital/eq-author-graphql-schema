@@ -46,6 +46,7 @@ type Answer {
     label: String
     type: AnswerType
     mandatory: Boolean
+    options: [Option]
     questionPageId: Int
 }
 
