@@ -46,7 +46,18 @@ type Answer {
     label: String
     type: AnswerType
     mandatory: Boolean
+    options: [Option]
     questionPageId: Int
+}
+
+type Option {
+    id: Int
+    label: String
+    description: String
+    value: String
+    qCode: String
+    childAnswerId: Int
+    answerId: Int
 }
 
 enum PageType {
@@ -93,6 +104,7 @@ type Query {
     page(id: Int!): Page
     questionPage(id: Int!): QuestionPage
     answer(id: Int!): Answer
+    option(id: Int!): Option
 }
 
 type Mutation {
@@ -119,5 +131,9 @@ type Mutation {
     createAnswer(description: String, guidance: String, label: String, qCode: String, type: AnswerType!, mandatory: Boolean!, questionPageId: Int!) : Answer
     updateAnswer(id: Int!, description: String, guidance: String, label: String, qCode: String, type: AnswerType, mandatory: Boolean) : Answer
     deleteAnswer(id: Int!) : Answer
+    
+    createOption(label: String, description: String, value: String, qCode: String, childAnswerId: Int, answerId: Int!) : Option
+    updateOption(id: Int!, label: String, description: String, value: String, qCode: String, childAnswerId: Int) : Option
+    deleteOption(id: Int!) : Option
 }
 `;
