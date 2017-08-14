@@ -38,7 +38,29 @@ type QuestionPage implements Page {
     sectionId: Int!
 }
 
-type Answer {
+interface Answer {
+    id: Int
+    description: String
+    guidance: String
+    qCode: String
+    label: String
+    type: AnswerType
+    mandatory: Boolean
+    questionPageId: Int
+}
+
+type BasicAnswer implements Answer {
+    id: Int
+    description: String
+    guidance: String
+    qCode: String
+    label: String
+    type: AnswerType
+    mandatory: Boolean
+    questionPageId: Int
+}
+
+type MultipleChoiceAnswer implements Answer {
     id: Int
     description: String
     guidance: String
