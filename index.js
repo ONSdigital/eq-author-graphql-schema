@@ -38,26 +38,48 @@ type QuestionPage implements Page {
     sectionId: Int!
 }
 
-type Answer {
-    id: Int
+interface Answer {
+    id: Int!
     description: String
     guidance: String
     qCode: String
     label: String
-    type: AnswerType
+    type: AnswerType!
+    mandatory: Boolean
+    questionPageId: Int!
+}
+
+type BasicAnswer implements Answer {
+    id: Int!
+    description: String
+    guidance: String
+    qCode: String
+    label: String
+    type: AnswerType!
+    mandatory: Boolean
+    questionPageId: Int!
+}
+
+type MultipleChoiceAnswer implements Answer {
+    id: Int!
+    description: String
+    guidance: String
+    qCode: String
+    label: String
+    type: AnswerType!
     mandatory: Boolean
     options: [Option]
-    questionPageId: Int
+    questionPageId: Int!
 }
 
 type Option {
-    id: Int
+    id: Int!
     label: String
     description: String
     value: String
     qCode: String
     childAnswerId: Int
-    answerId: Int
+    answerId: Int!
 }
 
 enum PageType {
