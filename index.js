@@ -39,41 +39,41 @@ type QuestionPage implements Page {
 }
 
 interface Answer {
-    id: Int
+    id: Int!
     description: String
     guidance: String
     qCode: String
     label: String
-    type: AnswerType
+    type: AnswerType!
     mandatory: Boolean
     questionPageId: Int
 }
 
 type BasicAnswer implements Answer {
-    id: Int
+    id: Int!
     description: String
     guidance: String
     qCode: String
     label: String
-    type: AnswerType
+    type: AnswerType!
     mandatory: Boolean
     questionPageId: Int
 }
 
 type MultipleChoiceAnswer implements Answer {
-    id: Int
+    id: Int!
     description: String
     guidance: String
     qCode: String
     label: String
-    type: AnswerType
+    type: AnswerType!
     mandatory: Boolean
     options: [Option]
     questionPageId: Int
 }
 
 type Option {
-    id: Int
+    id: Int!
     label: String
     description: String
     value: String
