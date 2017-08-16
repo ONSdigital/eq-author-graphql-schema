@@ -46,7 +46,7 @@ interface Answer {
     label: String
     type: AnswerType!
     mandatory: Boolean
-    questionPageId: Int
+    questionPageId: Int!
 }
 
 type BasicAnswer implements Answer {
@@ -57,7 +57,7 @@ type BasicAnswer implements Answer {
     label: String
     type: AnswerType!
     mandatory: Boolean
-    questionPageId: Int
+    questionPageId: Int!
 }
 
 type MultipleChoiceAnswer implements Answer {
@@ -69,7 +69,7 @@ type MultipleChoiceAnswer implements Answer {
     type: AnswerType!
     mandatory: Boolean
     options: [Option]
-    questionPageId: Int
+    questionPageId: Int!
 }
 
 type Option {
@@ -79,7 +79,7 @@ type Option {
     value: String
     qCode: String
     childAnswerId: Int
-    answerId: Int
+    answerId: Int!
 }
 
 enum PageType {
