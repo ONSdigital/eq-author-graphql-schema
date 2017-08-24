@@ -15,7 +15,7 @@ type Section {
     title: String!
     description: String
     pages: [Page]
-    questionnaireId: Int!
+    questionnaire: Questionnaire
 }
 
 interface Page {
@@ -23,7 +23,7 @@ interface Page {
     title: String!
     description: String
     pageType: PageType!
-    sectionId: Int!
+    section: Section
 }
 
 type QuestionPage implements Page {
@@ -35,7 +35,7 @@ type QuestionPage implements Page {
     type: QuestionType!
     mandatory: Boolean
     answers:  [Answer]
-    sectionId: Int!
+    section: Section
 }
 
 interface Answer {
@@ -46,7 +46,7 @@ interface Answer {
     label: String
     type: AnswerType!
     mandatory: Boolean
-    questionPageId: Int!
+    questionPage: QuestionPage
 }
 
 type BasicAnswer implements Answer {
@@ -57,7 +57,7 @@ type BasicAnswer implements Answer {
     label: String
     type: AnswerType!
     mandatory: Boolean
-    questionPageId: Int!
+    questionPage: QuestionPage
 }
 
 type MultipleChoiceAnswer implements Answer {
@@ -69,7 +69,7 @@ type MultipleChoiceAnswer implements Answer {
     type: AnswerType!
     mandatory: Boolean
     options: [Option]
-    questionPageId: Int!
+    questionPage: QuestionPage
 }
 
 type Option {
@@ -79,7 +79,7 @@ type Option {
     value: String
     qCode: String
     childAnswerId: Int
-    answerId: Int!
+    answer: Answer
 }
 
 enum PageType {
