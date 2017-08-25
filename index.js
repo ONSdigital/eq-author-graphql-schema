@@ -46,7 +46,7 @@ interface Answer {
     label: String
     type: AnswerType!
     mandatory: Boolean
-    questionPage: QuestionPage
+    page: QuestionPage
 }
 
 type BasicAnswer implements Answer {
@@ -57,7 +57,7 @@ type BasicAnswer implements Answer {
     label: String
     type: AnswerType!
     mandatory: Boolean
-    questionPage: QuestionPage
+    page: QuestionPage
 }
 
 type MultipleChoiceAnswer implements Answer {
@@ -69,7 +69,7 @@ type MultipleChoiceAnswer implements Answer {
     type: AnswerType!
     mandatory: Boolean
     options: [Option]
-    questionPage: QuestionPage
+    page: QuestionPage
 }
 
 type Option {
