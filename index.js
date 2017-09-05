@@ -15,7 +15,8 @@ type Section {
     title: String!
     description: String
     pages: [Page]
-    questionnaireId: Int!
+    questionnaireId: Int! @deprecated(reason: "use 'questionnaire' instead")
+    questionnaire: Questionnaire
 }
 
 interface Page {
@@ -23,7 +24,8 @@ interface Page {
     title: String!
     description: String
     pageType: PageType!
-    sectionId: Int!
+    sectionId: Int! @deprecated(reason: "use 'section' instead")
+    section: Section
 }
 
 type QuestionPage implements Page {
@@ -35,7 +37,8 @@ type QuestionPage implements Page {
     type: QuestionType!
     mandatory: Boolean
     answers:  [Answer]
-    sectionId: Int!
+    sectionId: Int! @deprecated(reason: "use 'section' instead")
+    section: Section
 }
 
 interface Answer {
@@ -46,7 +49,8 @@ interface Answer {
     label: String
     type: AnswerType!
     mandatory: Boolean
-    questionPageId: Int!
+    questionPageId: Int! @deprecated(reason: "use 'page' instead")
+    page: QuestionPage
 }
 
 type BasicAnswer implements Answer {
@@ -57,7 +61,8 @@ type BasicAnswer implements Answer {
     label: String
     type: AnswerType!
     mandatory: Boolean
-    questionPageId: Int!
+    questionPageId: Int! @deprecated(reason: "use 'page' instead")
+    page: QuestionPage
 }
 
 type MultipleChoiceAnswer implements Answer {
@@ -69,7 +74,8 @@ type MultipleChoiceAnswer implements Answer {
     type: AnswerType!
     mandatory: Boolean
     options: [Option]
-    questionPageId: Int!
+    questionPageId: Int! @deprecated(reason: "use 'page' instead")
+    page: QuestionPage
 }
 
 type Option {
@@ -79,7 +85,8 @@ type Option {
     value: String
     qCode: String
     childAnswerId: Int
-    answerId: Int!
+    answerId: Int! @deprecated(reason: "use 'answer' instead")
+    answer: Answer
 }
 
 enum PageType {
