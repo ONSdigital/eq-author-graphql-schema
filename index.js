@@ -35,7 +35,6 @@ type QuestionPage implements Page {
     guidance: String
     pageType: PageType!
     type: QuestionType!
-    mandatory: Boolean
     answers:  [Answer]
     sectionId: Int! @deprecated(reason: "use 'section' instead")
     section: Section
@@ -153,14 +152,14 @@ type Mutation {
     updatePage(id: Int!, title: String!, description: String) : Page
     deletePage(id: Int!) : Page
 
-    createQuestionPage(title: String!, description: String, guidance: String, type: QuestionType!, mandatory: Boolean, sectionId: Int!) : QuestionPage
-    updateQuestionPage(id: Int!, title: String, description: String, guidance: String, type: QuestionType, mandatory: Boolean) : QuestionPage
+    createQuestionPage(title: String!, description: String, guidance: String, type: QuestionType!, sectionId: Int!) : QuestionPage
+    updateQuestionPage(id: Int!, title: String, description: String, guidance: String, type: QuestionType) : QuestionPage
     deleteQuestionPage(id: Int!) : QuestionPage
 
     createAnswer(description: String, guidance: String, label: String, qCode: String, type: AnswerType!, mandatory: Boolean!, questionPageId: Int!) : Answer
     updateAnswer(id: Int!, description: String, guidance: String, label: String, qCode: String, type: AnswerType, mandatory: Boolean) : Answer
     deleteAnswer(id: Int!) : Answer
-    
+
     createOption(label: String, description: String, value: String, qCode: String, childAnswerId: Int, answerId: Int!) : Option
     updateOption(id: Int!, label: String, description: String, value: String, qCode: String, childAnswerId: Int) : Option
     deleteOption(id: Int!) : Option
