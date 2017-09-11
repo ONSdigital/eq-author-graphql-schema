@@ -34,7 +34,6 @@ type QuestionPage implements Page {
     description: String!
     guidance: String
     pageType: PageType!
-    type: QuestionType!
     answers:  [Answer]
     sectionId: Int! @deprecated(reason: "use 'section' instead")
     section: Section
@@ -93,13 +92,6 @@ enum PageType {
   InterstitialPage
 }
 
-enum QuestionType {
-    General
-    DateRange
-    RepeatingAnswer
-    Relationship
-}
-
 enum AnswerType {
     Checkbox
     Currency
@@ -152,8 +144,8 @@ type Mutation {
     updatePage(id: Int!, title: String!, description: String) : Page
     deletePage(id: Int!) : Page
 
-    createQuestionPage(title: String!, description: String, guidance: String, type: QuestionType!, sectionId: Int!) : QuestionPage
-    updateQuestionPage(id: Int!, title: String, description: String, guidance: String, type: QuestionType) : QuestionPage
+    createQuestionPage(title: String!, description: String, guidance: String, sectionId: Int!) : QuestionPage
+    updateQuestionPage(id: Int!, title: String, description: String, guidance: String) : QuestionPage
     deleteQuestionPage(id: Int!) : QuestionPage
 
     createAnswer(description: String, guidance: String, label: String, qCode: String, type: AnswerType!, mandatory: Boolean!, questionPageId: Int!) : Answer
