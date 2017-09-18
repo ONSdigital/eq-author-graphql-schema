@@ -6,6 +6,7 @@ module.exports = `type Questionnaire {
     legalBasis: LegalBasis
     navigation: Boolean
     surveyId: String
+    createdAt: String
     sections: [Section]
     groups: [Section] @deprecated(reason: "use 'sections' instead")
 }
