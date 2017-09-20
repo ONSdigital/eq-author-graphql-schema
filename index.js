@@ -1,9 +1,9 @@
 module.exports = `
-
 scalar Date
 
 type Questionnaire {
     id: Int
+    newId: ID
     title: String
     description: String
     theme: Theme
@@ -16,6 +16,7 @@ type Questionnaire {
 
 type Section {
     id: Int
+    newId: ID
     title: String!
     description: String
     pages: [Page]
@@ -24,6 +25,7 @@ type Section {
 
 interface Page {
     id: Int!
+    newId: ID
     title: String!
     description: String
     pageType: PageType!
@@ -32,6 +34,7 @@ interface Page {
 
 type QuestionPage implements Page {
     id: Int!
+    newId: ID
     title: String!
     description: String!
     guidance: String
@@ -42,6 +45,7 @@ type QuestionPage implements Page {
 
 interface Answer {
     id: Int!
+    newId: ID
     description: String
     guidance: String
     qCode: String
@@ -53,6 +57,7 @@ interface Answer {
 
 type BasicAnswer implements Answer {
     id: Int!
+    newId: ID
     description: String
     guidance: String
     qCode: String
@@ -64,6 +69,7 @@ type BasicAnswer implements Answer {
 
 type MultipleChoiceAnswer implements Answer {
     id: Int!
+    newId: ID
     description: String
     guidance: String
     qCode: String
@@ -76,6 +82,7 @@ type MultipleChoiceAnswer implements Answer {
 
 type Option {
     id: Int!
+    newId: ID
     label: String
     description: String
     value: String
@@ -114,12 +121,12 @@ enum Theme {
 
 type Query {
     questionnaires: [Questionnaire]
-    questionnaire(id: Int!): Questionnaire
-    section(id: Int!): Section
-    page(id: Int!): Page
-    questionPage(id: Int!): QuestionPage
-    answer(id: Int!): Answer
-    option(id: Int!): Option
+    questionnaire(id: Int, newId: ID): Questionnaire
+    section(id: Int, newId: ID): Section
+    page(id: Int, newId: ID): Page
+    questionPage(id: Int, newId: ID): QuestionPage
+    answer(id: Int, newId: ID): Answer
+    option(id: Int, newId: ID): Option
 }
 
 type Mutation {
