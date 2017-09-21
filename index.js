@@ -1,3 +1,5 @@
+const GraphQLDate = require("graphql-iso-date").GraphQLDate;
+
 module.exports = `type Questionnaire {
     id: Int
     title: String
@@ -6,7 +8,7 @@ module.exports = `type Questionnaire {
     legalBasis: LegalBasis
     navigation: Boolean
     surveyId: String
-    createdAt: String
+    createdAt: GraphQLDate
     sections: [Section]
     groups: [Section] @deprecated(reason: "use 'sections' instead")
 }

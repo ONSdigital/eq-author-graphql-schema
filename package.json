@@ -5,5 +5,8 @@
   "main": "index.js",
   "repository": "git@github.com:ONSdigital/eq-author-graphql-schema.git",
   "author": "Samiwel Thomas <samiwel.thomas@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "graphql-iso-date": "^3.3.0"
+  }
 }
