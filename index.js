@@ -131,28 +131,148 @@ type Query {
 
 type Mutation {
     # creates a Questionnaire along with an initial Section and Page
-    createQuestionnaire(title: String!, description: String, theme: String!, legalBasis: LegalBasis!, navigation: Boolean, surveyId: String!) : Questionnaire
-    updateQuestionnaire(id: Int!, title: String, description: String, theme: String, legalBasis: LegalBasis, navigation: Boolean, surveyId: String) : Questionnaire
-    deleteQuestionnaire(id: Int!) : Questionnaire
+    createQuestionnaire(title: String, description: String, theme: String, legalBasis: LegalBasis, navigation: Boolean, surveyId: String, input: CreateQuestionnaireInput) : Questionnaire
+    updateQuestionnaire(id: Int, title: String, description: String, theme: String, legalBasis: LegalBasis, navigation: Boolean, surveyId: String, input: UpdateQuestionnaireInput) : Questionnaire
+    deleteQuestionnaire(id: Int, input: DeleteQuestionnaireInput) : Questionnaire
 
-    createSection(title: String!, description: String, questionnaireId: Int!) : Section
-    updateSection(id: Int!, title: String, description: String) : Section
-    deleteSection(id: Int!) : Section
+    createSection(title: String, description: String, questionnaireId: Int, input: CreateSectionInput) : Section
+    updateSection(id: Int, title: String, description: String, input: UpdateSectionInput) : Section
+    deleteSection(id: Int, input: DeleteSectionInput) : Section
 
-    createPage(title: String!, description: String, sectionId: Int!) : Page
-    updatePage(id: Int!, title: String!, description: String) : Page
-    deletePage(id: Int!) : Page
+    createPage(title: String, description: String, sectionId: Int, input: CreatePageInput) : Page
+    updatePage(id: Int, title: String, description: String, input: UpdatePageInput) : Page
+    deletePage(id: Int, input: DeletePageInput) : Page
 
-    createQuestionPage(title: String!, description: String, guidance: String, sectionId: Int!) : QuestionPage
-    updateQuestionPage(id: Int!, title: String, description: String, guidance: String) : QuestionPage
-    deleteQuestionPage(id: Int!) : QuestionPage
+    createQuestionPage(title: String, description: String, guidance: String, sectionId: Int, input: CreateQuestionPageInput) : QuestionPage
+    updateQuestionPage(id: Int, title: String, description: String, guidance: String, input: UpdateQuestionPageInput) : QuestionPage
+    deleteQuestionPage(id: Int, input: DeleteQuestionPageInput) : QuestionPage
 
-    createAnswer(description: String, guidance: String, label: String, qCode: String, type: AnswerType!, mandatory: Boolean!, questionPageId: Int!) : Answer
-    updateAnswer(id: Int!, description: String, guidance: String, label: String, qCode: String, type: AnswerType, mandatory: Boolean) : Answer
-    deleteAnswer(id: Int!) : Answer
+    createAnswer(description: String, guidance: String, label: String, qCode: String, type: AnswerType, mandatory: Boolean, questionPageId: Int, input: CreateAnswerInput) : Answer
+    updateAnswer(id: Int, description: String, guidance: String, label: String, qCode: String, type: AnswerType, mandatory: Boolean, input: UpdateAnswerInput) : Answer
+    deleteAnswer(id: Int, input: DeleteAnswerInput) : Answer
     
-    createOption(label: String, description: String, value: String, qCode: String, childAnswerId: Int, answerId: Int!) : Option
-    updateOption(id: Int!, label: String, description: String, value: String, qCode: String, childAnswerId: Int) : Option
-    deleteOption(id: Int!) : Option
+    createOption(label: String, description: String, value: String, qCode: String, childAnswerId: Int, answerId: Int, input: CreateOptionInput) : Option
+    updateOption(id: Int, label: String, description: String, value: String, qCode: String, childAnswerId: Int, input: UpdateOptionInput) : Option
+    deleteOption(id: Int, input: DeleteOptionInput) : Option
+}
+
+
+input CreateQuestionnaireInput {
+    title: String!
+    description: String
+    theme: String!
+    legalBasis: LegalBasis!
+    navigation: Boolean
+    surveyId: String!
+}
+
+input UpdateQuestionnaireInput {
+    id: ID!
+    title: String
+    description: String
+    theme: String
+    legalBasis: LegalBasis
+    navigation: Boolean
+    surveyId: String
+}
+
+input DeleteQuestionnaireInput {
+    id: ID!
+}
+
+input CreateSectionInput {
+    title: String!
+    description: String
+    questionnaireId: ID!
+}
+
+input UpdateSectionInput {
+    id: ID!
+    title: String
+    description: String
+}
+
+input DeleteSectionInput {
+    id: ID!
+}
+
+input CreatePageInput {
+    title: String!
+    description: String
+    sectionId: ID!
+}
+
+input UpdatePageInput {
+    id: ID!
+    title: String!
+    description: String
+}
+
+input DeletePageInput {
+    id: ID!
+}
+
+input CreateQuestionPageInput {
+    title: String!
+    description: String
+    guidance: String
+    sectionId: ID!
+}
+
+input UpdateQuestionPageInput {
+    id: ID!
+    title: String
+    description: String
+    guidance: String
+}
+
+input DeleteQuestionPageInput {
+    id: ID!
+}
+
+input CreateAnswerInput {
+    description: String
+    guidance: String
+    label: String
+    qCode: String
+    type: AnswerType!
+    mandatory: Boolean!
+    questionPageId: ID!
+}
+
+input UpdateAnswerInput {
+    id: ID!
+    description: String
+    guidance: String
+    label: String
+    qCode: String
+    type: AnswerType
+    mandatory: Boolean
+}
+
+input DeleteAnswerInput {
+    id: ID!
+}
+
+input CreateOptionInput {
+    label: String
+    description: String
+    value: String
+    qCode: String
+    childAnswerId: ID
+    answerId: ID!
+}
+
+input UpdateOptionInput {
+    id: ID!
+    label: String
+    description: String
+    value: String
+    qCode: String
+    childAnswerId: ID
+}
+
+input DeleteOptionInput {
+    id: ID!
 }
 `;
