@@ -24,7 +24,7 @@ type Section {
 }
 
 interface Page {
-    id: Int!
+    id: Int
     newId: ID
     title: String!
     description: String
@@ -33,7 +33,7 @@ interface Page {
 }
 
 type QuestionPage implements Page {
-    id: Int!
+    id: Int
     newId: ID
     title: String!
     description: String!
@@ -44,7 +44,7 @@ type QuestionPage implements Page {
 }
 
 interface Answer {
-    id: Int!
+    id: Int
     newId: ID
     description: String
     guidance: String
@@ -56,7 +56,7 @@ interface Answer {
 }
 
 type BasicAnswer implements Answer {
-    id: Int!
+    id: Int
     newId: ID
     description: String
     guidance: String
@@ -68,7 +68,7 @@ type BasicAnswer implements Answer {
 }
 
 type MultipleChoiceAnswer implements Answer {
-    id: Int!
+    id: Int
     newId: ID
     description: String
     guidance: String
@@ -81,7 +81,7 @@ type MultipleChoiceAnswer implements Answer {
 }
 
 type Option {
-    id: Int!
+    id: Int
     newId: ID
     label: String
     description: String
