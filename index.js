@@ -1,4 +1,8 @@
-module.exports = `type Questionnaire {
+module.exports = `
+
+scalar Date
+
+type Questionnaire {
     id: Int
     title: String
     description: String
@@ -6,6 +10,7 @@ module.exports = `type Questionnaire {
     legalBasis: LegalBasis
     navigation: Boolean
     surveyId: String
+    createdAt: Date
     sections: [Section]
     groups: [Section] @deprecated(reason: "use 'sections' instead")
 }
