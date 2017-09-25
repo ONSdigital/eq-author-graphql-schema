@@ -102,9 +102,8 @@ enum AnswerType {
     Currency
     Date
     MonthYearDate
-    Integer
+    Number
     Percentage
-    PositiveInteger
     Radio
     TextArea
     TextField
