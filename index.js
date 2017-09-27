@@ -2,8 +2,8 @@ module.exports = `
 scalar Date
 
 type Questionnaire {
-  id: Int
-  newId: ID
+  id: ID!
+  newId: ID @deprecated(reason: "use 'id' instead")
   title: String
   description: String
   theme: Theme
@@ -15,8 +15,8 @@ type Questionnaire {
 }
 
 type Section {
-  id: Int
-  newId: ID
+  id: ID!
+  newId: ID @deprecated(reason: "use 'id' instead")
   title: String!
   description: String
   pages: [Page]
@@ -24,8 +24,8 @@ type Section {
 }
 
 interface Page {
-  id: Int
-  newId: ID
+  id: ID!
+  newId: ID @deprecated(reason: "use 'id' instead")
   title: String!
   description: String
   pageType: PageType!
@@ -33,8 +33,8 @@ interface Page {
 }
 
 type QuestionPage implements Page {
-  id: Int
-  newId: ID
+  id: ID!
+  newId: ID @deprecated(reason: "use 'id' instead")
   title: String!
   description: String!
   guidance: String
@@ -44,8 +44,8 @@ type QuestionPage implements Page {
 }
 
 interface Answer {
-  id: Int
-  newId: ID
+  id: ID!
+  newId: ID @deprecated(reason: "use 'id' instead")
   description: String
   guidance: String
   qCode: String
@@ -56,8 +56,8 @@ interface Answer {
 }
 
 type BasicAnswer implements Answer {
-  id: Int
-  newId: ID
+  id: ID!
+  newId: ID @deprecated(reason: "use 'id' instead")
   description: String
   guidance: String
   qCode: String
@@ -68,8 +68,8 @@ type BasicAnswer implements Answer {
 }
 
 type MultipleChoiceAnswer implements Answer {
-  id: Int
-  newId: ID
+  id: ID!
+  newId: ID @deprecated(reason: "use 'id' instead")
   description: String
   guidance: String
   qCode: String
@@ -81,8 +81,8 @@ type MultipleChoiceAnswer implements Answer {
 }
 
 type Option {
-  id: Int
-  newId: ID
+  id: ID!
+  newId: ID @deprecated(reason: "use 'id' instead")
   label: String
   description: String
   value: String
@@ -121,117 +121,34 @@ enum Theme {
 
 type Query {
   questionnaires: [Questionnaire]
-  questionnaire(id: Int, newId: ID): Questionnaire
-  section(id: Int, newId: ID): Section
-  page(id: Int, newId: ID): Page
-  questionPage(id: Int, newId: ID): QuestionPage
-  answer(id: Int, newId: ID): Answer
-  option(id: Int, newId: ID): Option
+  questionnaire(id: ID!, newId: ID): Questionnaire
+  section(id: ID!, newId: ID): Section
+  page(id: ID!, newId: ID): Page
+  questionPage(id: ID!, newId: ID): QuestionPage
+  answer(id: ID!, newId: ID): Answer
+  option(id: ID!, newId: ID): Option
 }
 
 type Mutation {
   # creates a Questionnaire along with an initial Section and Page
-  createQuestionnaire(
-    title: String
-    description: String
-    theme: String
-    legalBasis: LegalBasis
-    navigation: Boolean
-    surveyId: String
-    input: CreateQuestionnaireInput
-  ): Questionnaire
-  updateQuestionnaire(
-    id: Int
-    title: String
-    description: String
-    theme: String
-    legalBasis: LegalBasis
-    navigation: Boolean
-    surveyId: String
-    input: UpdateQuestionnaireInput
-  ): Questionnaire
-  deleteQuestionnaire(id: Int, input: DeleteQuestionnaireInput): Questionnaire
-  createSection(
-    title: String
-    description: String
-    questionnaireId: Int
-    input: CreateSectionInput
-  ): Section
-  updateSection(
-    id: Int
-    title: String
-    description: String
-    input: UpdateSectionInput
-  ): Section
-  deleteSection(id: Int, input: DeleteSectionInput): Section
-  createPage(
-    title: String
-    description: String
-    sectionId: Int
-    input: CreatePageInput
-  ): Page
-  updatePage(
-    id: Int
-    title: String
-    description: String
-    input: UpdatePageInput
-  ): Page
-  deletePage(id: Int, input: DeletePageInput): Page
-  createQuestionPage(
-    title: String
-    description: String
-    guidance: String
-    sectionId: Int
-    input: CreateQuestionPageInput
-  ): QuestionPage
-  updateQuestionPage(
-    id: Int
-    title: String
-    description: String
-    guidance: String
-    input: UpdateQuestionPageInput
-  ): QuestionPage
-  deleteQuestionPage(id: Int, input: DeleteQuestionPageInput): QuestionPage
-  createAnswer(
-    description: String
-    guidance: String
-    label: String
-    qCode: String
-    type: AnswerType
-    mandatory: Boolean
-    questionPageId: Int
-    input: CreateAnswerInput
-  ): Answer
-  updateAnswer(
-    id: Int
-    description: String
-    guidance: String
-    label: String
-    qCode: String
-    type: AnswerType
-    mandatory: Boolean
-    input: UpdateAnswerInput
-  ): Answer
-  deleteAnswer(id: Int, input: DeleteAnswerInput): Answer
-  createOption(
-    label: String
-    description: String
-    value: String
-    qCode: String
-    childAnswerId: Int
-    answerId: Int
-    input: CreateOptionInput
-  ): Option
-  updateOption(
-    id: Int
-    label: String
-    description: String
-    value: String
-    qCode: String
-    childAnswerId: Int
-    input: UpdateOptionInput
-  ): Option
-  deleteOption(id: Int, input: DeleteOptionInput): Option
+  createQuestionnaire(input: CreateQuestionnaireInput!): Questionnaire
+  updateQuestionnaire(input: UpdateQuestionnaireInput!): Questionnaire
+  deleteQuestionnaire(input: DeleteQuestionnaireInput!): Questionnaire
+  createSection(input: CreateSectionInput!): Section
+  updateSection(input: UpdateSectionInput!): Section
+  deleteSection(input: DeleteSectionInput!): Section
+  createPage(input: CreatePageInput!): Page
+  updatePage(input: UpdatePageInput!): Page
+  deletePage(input: DeletePageInput!): Page
+  createQuestionPage(input: CreateQuestionPageInput!): QuestionPage
+  updateQuestionPage(input: UpdateQuestionPageInput!): QuestionPage
+  deleteQuestionPage(input: DeleteQuestionPageInput!): QuestionPage
+  createAnswer(input: CreateAnswerInput!): Answer
+  updateAnswer(input: UpdateAnswerInput!): Answer
+  deleteAnswer(input: DeleteAnswerInput!): Answer
+  createOption(input: CreateOptionInput!): Option
+  updateOption(input: UpdateOptionInput!): Option
+  deleteOption(input: DeleteOptionInput!): Option
 }
 
 input CreateQuestionnaireInput {
@@ -352,5 +269,4 @@ input UpdateOptionInput {
 input DeleteOptionInput {
   id: ID!
 }
-
 `;
