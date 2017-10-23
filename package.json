@@ -1,6 +1,6 @@
 {
   "name": "eq-author-graphql-schema",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "files": ["index.js"],
   "description": "The GraphQL schema for the eq-author application.",
   "main": "index.js",

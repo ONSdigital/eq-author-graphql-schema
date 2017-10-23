@@ -100,6 +100,7 @@ enum AnswerType {
   Checkbox
   Currency
   Date
+  DateRange
   MonthYearDate
   Number
   Percentage
