@@ -132,25 +132,30 @@ type Query {
 }
 
 type Mutation {
-  # creates a Questionnaire along with an initial Section and Page
   createQuestionnaire(input: CreateQuestionnaireInput!): Questionnaire
   updateQuestionnaire(input: UpdateQuestionnaireInput!): Questionnaire
   deleteQuestionnaire(input: DeleteQuestionnaireInput!): Questionnaire
+  undeleteQuestionnaire(input: UndeleteQuestionnaireInput!): Questionnaire
   createSection(input: CreateSectionInput!): Section
   updateSection(input: UpdateSectionInput!): Section
   deleteSection(input: DeleteSectionInput!): Section
+  undeleteSection(input: UndeleteSectionInput!): Section
   createPage(input: CreatePageInput!): Page
   updatePage(input: UpdatePageInput!): Page
   deletePage(input: DeletePageInput!): Page
+  undeletePage(input: UndeletePageInput!): Page
   createQuestionPage(input: CreateQuestionPageInput!): QuestionPage
   updateQuestionPage(input: UpdateQuestionPageInput!): QuestionPage
   deleteQuestionPage(input: DeleteQuestionPageInput!): QuestionPage
+  undeleteQuestionPage(input: UndeleteQuestionPageInput!): QuestionPage
   createAnswer(input: CreateAnswerInput!): Answer
   updateAnswer(input: UpdateAnswerInput!): Answer
   deleteAnswer(input: DeleteAnswerInput!): Answer
+  undeleteAnswer(input: UndeleteAnswerInput!): Answer
   createOption(input: CreateOptionInput!): Option
   updateOption(input: UpdateOptionInput!): Option
   deleteOption(input: DeleteOptionInput!): Option
+  undeleteOption(input: UndeleteOptionInput!): Option
 }
 
 input CreateQuestionnaireInput {
@@ -176,6 +181,10 @@ input DeleteQuestionnaireInput {
   id: ID!
 }
 
+input UndeleteQuestionnaireInput {
+  id: ID!
+}
+
 input CreateSectionInput {
   title: String!
   description: String
@@ -189,6 +198,10 @@ input UpdateSectionInput {
 }
 
 input DeleteSectionInput {
+  id: ID!
+}
+
+input UndeleteSectionInput {
   id: ID!
 }
 
@@ -208,6 +221,10 @@ input DeletePageInput {
   id: ID!
 }
 
+input UndeletePageInput {
+  id: ID!
+}
+
 input CreateQuestionPageInput {
   title: String!
   description: String
@@ -223,6 +240,10 @@ input UpdateQuestionPageInput {
 }
 
 input DeleteQuestionPageInput {
+  id: ID!
+}
+
+input UndeleteQuestionPageInput {
   id: ID!
 }
 
@@ -250,6 +271,10 @@ input DeleteAnswerInput {
   id: ID!
 }
 
+input UndeleteAnswerInput {
+  id: ID!
+}
+
 input CreateOptionInput {
   label: String
   description: String
@@ -269,6 +294,10 @@ input UpdateOptionInput {
 }
 
 input DeleteOptionInput {
+  id: ID!
+}
+
+input UndeleteOptionInput {
   id: ID!
 }
 `;
