@@ -127,6 +127,7 @@ type Query {
   page(id: ID!, newId: ID): Page
   questionPage(id: ID!, newId: ID): QuestionPage
   answer(id: ID!, newId: ID): Answer
+  answers(ids: [ID]!): [Answer]
   option(id: ID!, newId: ID): Option
 }
 
