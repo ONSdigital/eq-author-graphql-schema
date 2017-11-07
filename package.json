@@ -7,5 +7,8 @@
   "repository": "git@github.com:ONSdigital/eq-author-graphql-schema.git",
   "author": "Samiwel Thomas <samiwel.thomas@gmail.com>",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {},
+  "scripts": {
+    "postversion": "git push && git push --tags"
+  }
 }
