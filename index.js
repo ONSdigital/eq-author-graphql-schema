@@ -12,6 +12,7 @@ type Questionnaire {
   surveyId: String
   createdAt: Date
   sections: [Section]
+  summary: Boolean
 }
 
 type Section {
@@ -165,6 +166,7 @@ input CreateQuestionnaireInput {
   legalBasis: LegalBasis!
   navigation: Boolean
   surveyId: String!
+  summary: Boolean
 }
 
 input UpdateQuestionnaireInput {
@@ -175,6 +177,7 @@ input UpdateQuestionnaireInput {
   legalBasis: LegalBasis
   navigation: Boolean
   surveyId: String
+  summary: Boolean
 }
 
 input DeleteQuestionnaireInput {
