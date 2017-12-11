@@ -1,6 +1,10 @@
 module.exports = `
 scalar Date
 
+type User {
+  name: String!
+}
+
 type Questionnaire {
   id: ID!
   newId: ID @deprecated(reason: "use 'id' instead")
@@ -11,6 +15,7 @@ type Questionnaire {
   navigation: Boolean
   surveyId: String
   createdAt: Date
+  createdBy: User!
   sections: [Section]
   summary: Boolean
 }
@@ -167,6 +172,7 @@ input CreateQuestionnaireInput {
   navigation: Boolean
   surveyId: String!
   summary: Boolean
+  createdBy: String
 }
 
 input UpdateQuestionnaireInput {
