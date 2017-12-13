@@ -7,7 +7,6 @@ type User {
 
 type Questionnaire {
   id: ID!
-  newId: ID @deprecated(reason: "use 'id' instead")
   title: String
   description: String
   theme: Theme
@@ -22,7 +21,6 @@ type Questionnaire {
 
 type Section {
   id: ID!
-  newId: ID @deprecated(reason: "use 'id' instead")
   title: String!
   description: String
   pages: [Page]
@@ -31,7 +29,6 @@ type Section {
 
 interface Page {
   id: ID!
-  newId: ID @deprecated(reason: "use 'id' instead")
   title: String!
   description: String
   pageType: PageType!
@@ -40,7 +37,6 @@ interface Page {
 
 type QuestionPage implements Page {
   id: ID!
-  newId: ID @deprecated(reason: "use 'id' instead")
   title: String!
   description: String!
   guidance: String
@@ -51,7 +47,6 @@ type QuestionPage implements Page {
 
 interface Answer {
   id: ID!
-  newId: ID @deprecated(reason: "use 'id' instead")
   description: String
   guidance: String
   qCode: String
@@ -63,7 +58,6 @@ interface Answer {
 
 type BasicAnswer implements Answer {
   id: ID!
-  newId: ID @deprecated(reason: "use 'id' instead")
   description: String
   guidance: String
   qCode: String
@@ -75,7 +69,6 @@ type BasicAnswer implements Answer {
 
 type MultipleChoiceAnswer implements Answer {
   id: ID!
-  newId: ID @deprecated(reason: "use 'id' instead")
   description: String
   guidance: String
   qCode: String
@@ -88,7 +81,6 @@ type MultipleChoiceAnswer implements Answer {
 
 type Option {
   id: ID!
-  newId: ID @deprecated(reason: "use 'id' instead")
   label: String
   description: String
   value: String
@@ -128,13 +120,13 @@ enum Theme {
 
 type Query {
   questionnaires: [Questionnaire]
-  questionnaire(id: ID!, newId: ID): Questionnaire
-  section(id: ID!, newId: ID): Section
-  page(id: ID!, newId: ID): Page
-  questionPage(id: ID!, newId: ID): QuestionPage
-  answer(id: ID!, newId: ID): Answer
+  questionnaire(id: ID!): Questionnaire
+  section(id: ID!): Section
+  page(id: ID!): Page
+  questionPage(id: ID!): QuestionPage
+  answer(id: ID!): Answer
   answers(ids: [ID]!): [Answer]
-  option(id: ID!, newId: ID): Option
+  option(id: ID!): Option
 }
 
 type Mutation {
