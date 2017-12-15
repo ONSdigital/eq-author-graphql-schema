@@ -1,9 +1,7 @@
 {
   "name": "eq-author-graphql-schema",
   "version": "0.4.0",
-  "files": [
-    "index.js"
-  ],
+  "files": ["index.js"],
   "description": "The GraphQL schema for the eq-author application.",
   "main": "index.js",
   "repository": "git@github.com:ONSdigital/eq-author-graphql-schema.git",
@@ -11,6 +9,11 @@
   "license": "MIT",
   "dependencies": {},
   "scripts": {
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "test": "./scripts/build.js"
+  },
+  "devDependencies": {
+    "chalk": "^2.3.0",
+    "graphql": "^0.11.7"
   }
 }
