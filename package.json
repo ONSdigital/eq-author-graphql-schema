@@ -9,7 +9,7 @@
   "license": "MIT",
   "dependencies": {},
   "scripts": {
-    "postversion": "git push && git push --tags",
+    "postversion": "git push origin head && git push --tags",
     "test": "./scripts/build.js"
   },
   "devDependencies": {
