@@ -33,6 +33,7 @@ interface Page {
   description: String
   pageType: PageType!
   section: Section
+  position: Int!
 }
 
 type QuestionPage implements Page {
@@ -43,6 +44,7 @@ type QuestionPage implements Page {
   pageType: PageType!
   answers: [Answer]
   section: Section
+  position: Int!
 }
 
 interface Answer {
@@ -142,6 +144,7 @@ type Mutation {
   updatePage(input: UpdatePageInput!): Page
   deletePage(input: DeletePageInput!): Page
   undeletePage(input: UndeletePageInput!): Page
+  movePage(input: MovePageInput!): Page
   createQuestionPage(input: CreateQuestionPageInput!): QuestionPage
   updateQuestionPage(input: UpdateQuestionPageInput!): QuestionPage
   deleteQuestionPage(input: DeleteQuestionPageInput!): QuestionPage
@@ -210,6 +213,7 @@ input CreatePageInput {
   title: String!
   description: String
   sectionId: ID!
+  position: Int
 }
 
 input UpdatePageInput {
@@ -231,6 +235,7 @@ input CreateQuestionPageInput {
   description: String
   guidance: String
   sectionId: ID!
+  position: Int
 }
 
 input UpdateQuestionPageInput {
@@ -300,5 +305,11 @@ input DeleteOptionInput {
 
 input UndeleteOptionInput {
   id: ID!
+}
+
+input MovePageInput {
+  id: ID!
+  sectionId: ID!
+  position: Int!
 }
 `;
