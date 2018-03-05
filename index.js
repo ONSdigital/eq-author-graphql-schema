@@ -87,7 +87,6 @@ type Option {
   description: String
   value: String
   qCode: String
-  childAnswerId: Int
   answer: Answer
 }
 
@@ -286,7 +285,6 @@ input CreateOptionInput {
   description: String
   value: String
   qCode: String
-  childAnswerId: ID
   answerId: ID!
 }
 
@@ -296,7 +294,6 @@ input UpdateOptionInput {
   description: String
   value: String
   qCode: String
-  childAnswerId: ID
 }
 
 input DeleteOptionInput {
