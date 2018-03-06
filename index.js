@@ -78,7 +78,7 @@ type MultipleChoiceAnswer implements Answer {
   type: AnswerType!
   mandatory: Boolean
   options: [Option]
-  otherAnswer: Answer
+  otherAnswer: BasicAnswer
   page: QuestionPage
 }
 
@@ -157,6 +157,8 @@ type Mutation {
   updateOption(input: UpdateOptionInput!): Option
   deleteOption(input: DeleteOptionInput!): Option
   undeleteOption(input: UndeleteOptionInput!): Option
+  createOtherAnswer(input: CreateOtherAnswerInput!): Answer
+  deleteOtherAnswer(input: DeleteOtherAnswerInput!): Answer
 }
 
 input CreateQuestionnaireInput {
@@ -260,7 +262,6 @@ input CreateAnswerInput {
   qCode: String
   type: AnswerType!
   mandatory: Boolean!
-  otherAnswerId: ID
   questionPageId: ID!
 }
 
@@ -271,7 +272,6 @@ input UpdateAnswerInput {
   label: String
   qCode: String
   type: AnswerType
-  otherAnswerId: ID
   mandatory: Boolean
 }
 
@@ -312,4 +312,14 @@ input MovePageInput {
   sectionId: ID!
   position: Int!
 }
+
+input CreateOtherAnswerInput {
+  id: ID!
+  type: AnswerType!
+}
+
+input DeleteOtherAnswerInput {
+  id: ID!
+}
+
 `;
