@@ -78,7 +78,7 @@ type MultipleChoiceAnswer implements Answer {
   type: AnswerType!
   mandatory: Boolean
   options: [Option]
-  other: Answer
+  otherAnswer: Answer
   page: QuestionPage
 }
 
@@ -260,7 +260,7 @@ input CreateAnswerInput {
   qCode: String
   type: AnswerType!
   mandatory: Boolean!
-  other: Answer
+  otherAnswerId: ID
   questionPageId: ID!
 }
 
@@ -271,7 +271,7 @@ input UpdateAnswerInput {
   label: String
   qCode: String
   type: AnswerType
-  other: Answer
+  otherAnswerId: ID
   mandatory: Boolean
 }
 
