@@ -314,12 +314,11 @@ input MovePageInput {
 }
 
 input CreateOtherAnswerInput {
-  id: ID!
-  type: AnswerType!
+  parentAnswerId: ID!
 }
 
 input DeleteOtherAnswerInput {
-  id: ID!
+  parentAnswerId: ID!
 }
 
 `;
