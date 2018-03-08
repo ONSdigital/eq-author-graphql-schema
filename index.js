@@ -45,6 +45,7 @@ type QuestionPage implements Page {
   answers: [Answer]
   section: Section
   position: Int!
+  routingRuleSet: RoutingRuleSet!
 }
 
 interface Answer {
@@ -90,6 +91,46 @@ type Option {
   value: String
   qCode: String
   answer: Answer
+}
+
+type RoutingRuleSet {
+  id: ID!
+  routingRules: [RoutingRule]
+  questionPage: QuestionPage
+}
+
+type RoutingRule {
+  id: ID!
+  operation: RoutingOperation
+  conditions: [RoutingCondition]
+  goto: Page
+}
+
+type RoutingCondition {
+  id: ID!
+  comparator: RoutingComparator
+  answer: Answer
+  routingValue: RoutingConditionValue
+}
+
+type IntValue {
+  value: Int
+}
+
+type IntArrayValue {
+  value: [Int]
+}
+
+union RoutingConditionValue = IntValue | IntArrayValue
+
+enum RoutingOperation {
+  And
+  Or
+}
+
+enum RoutingComparator {
+  Equal,
+  NotEqual
 }
 
 enum PageType {
@@ -160,6 +201,15 @@ type Mutation {
   undeleteOption(input: UndeleteOptionInput!): Option
   createOtherAnswer(input: CreateOtherAnswerInput!): Answer
   deleteOtherAnswer(input: DeleteOtherAnswerInput!): Answer
+  createRoutingRuleSet(input: CreateRoutingRuleSetInput!): RoutingRuleSet
+  updateRoutingRuleSet(input: UpdateRoutingRuleSetInput!): RoutingRuleSet
+  deleteRoutingRuleSet(input: DeleteRoutingRuleSetInput!): RoutingRuleSet
+  createRoutingRule(input: CreateRoutingRuleInput!): RoutingRule
+  updateRoutingRule(input: UpdateRoutingRuleInput!): RoutingRule
+  deleteRoutingRule(input: DeleteRoutingRuleInput!): RoutingRule
+  createRoutingCondition(input: CreateRoutingConditionInput!): RoutingCondition
+  updateRoutingCondition(input: UpdateRoutingConditionInput!): RoutingCondition
+  deleteRoutingCondition(input: DeleteRoutingConditionInput!): RoutingCondition
 }
 
 input CreateQuestionnaireInput {
@@ -324,4 +374,56 @@ input DeleteOtherAnswerInput {
   parentAnswerId: ID!
 }
 
+input CreateRoutingRuleSetInput {
+  questionPageId: ID!
+}
+
+input UpdateRoutingRuleSetInput {
+  id: ID!
+  questionPageId: ID!
+}
+
+input DeleteRoutingRuleSetInput {
+  id: ID!
+}
+
+input CreateRoutingRuleInput {
+  routingRuleSet: ID!
+  operation: RoutingOperation
+  conditions: [ID]
+  goto: ID
+}
+
+input UpdateRoutingRuleInput {
+  id: ID!
+  operation: RoutingOperation
+  conditions: [ID]
+  goto: ID
+}
+
+input DeleteRoutingRuleInput {
+  id: ID!
+}
+
+input CreateRoutingConditionInput {
+  comparator: RoutingComparator!
+  answerId: ID!
+  routingValue: RoutingConditionValueInput!
+}
+
+input UpdateRoutingConditionInput {
+  id: ID!
+  comparator: RoutingComparator
+  answerId: ID
+  routingValue: RoutingConditionValueInput
+}
+
+input DeleteRoutingConditionInput {
+  id: ID!
+}
+
+input RoutingConditionValueInput {
+  intValue: Int
+  intArrayValue: [Int]
+}
 `;
