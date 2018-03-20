@@ -69,6 +69,18 @@ type BasicAnswer implements Answer {
   page: QuestionPage
 }
 
+type CompositeAnswer implements Answer {
+  id: ID!
+  description: String
+  guidance: String
+  qCode: String
+  label: String
+  type: AnswerType!
+  answers: [Answer]
+  mandatory: Boolean
+  page: QuestionPage
+}
+
 type MultipleChoiceAnswer implements Answer {
   id: ID!
   description: String
@@ -159,6 +171,9 @@ type Mutation {
   undeleteOption(input: UndeleteOptionInput!): Option
   createOtherAnswer(input: CreateOtherAnswerInput!): Answer
   deleteOtherAnswer(input: DeleteOtherAnswerInput!): Answer
+  createCompositeAnswerInput(input: CreateCompositeAnswerInput!): Answer
+  deleteCompositeAnswer(input: DeleteCompositeAnswerInput!): Answer
+  unDeleteCompositeAnswer(input: UnDeleteCompositeAnswerInput!): Answer
 }
 
 input CreateQuestionnaireInput {
@@ -265,6 +280,17 @@ input CreateAnswerInput {
   questionPageId: ID!
 }
 
+input CreateCompositeAnswerInput {
+  description: String
+  guidance: String
+  label: String
+  qCode: String
+  type: AnswerType!
+  mandatory: Boolean!
+  questionPageId: ID!
+  containedAnswers: [ID]!
+}
+
 input UpdateAnswerInput {
   id: ID!
   description: String
@@ -278,6 +304,15 @@ input UpdateAnswerInput {
 input DeleteAnswerInput {
   id: ID!
 }
+
+input DeleteCompositeAnswerInput{
+  id: [ID!]
+}
+
+input UnDeleteCompositeAnswerInput{
+  id: [ID!]
+}
+
 
 input UndeleteAnswerInput {
   id: ID!
