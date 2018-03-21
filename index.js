@@ -120,6 +120,7 @@ enum AnswerType {
   TextArea
   TextField
   Relationship
+  Composite
 }
 
 enum LegalBasis {
@@ -171,7 +172,7 @@ type Mutation {
   undeleteOption(input: UndeleteOptionInput!): Option
   createOtherAnswer(input: CreateOtherAnswerInput!): Answer
   deleteOtherAnswer(input: DeleteOtherAnswerInput!): Answer
-  createCompositeAnswerInput(input: CreateCompositeAnswerInput!): Answer
+  createCompositeAnswerChild(input: CreateCompositeAnswerChildInput!): Answer
   deleteCompositeAnswer(input: DeleteCompositeAnswerInput!): Answer
   unDeleteCompositeAnswer(input: UnDeleteCompositeAnswerInput!): Answer
 }
@@ -280,15 +281,15 @@ input CreateAnswerInput {
   questionPageId: ID!
 }
 
-input CreateCompositeAnswerInput {
+input CreateCompositeAnswerChildInput {
   description: String
   guidance: String
   label: String
   qCode: String
-  type: AnswerType!
-  mandatory: Boolean!
-  questionPageId: ID!
-  containedAnswers: [ID]!
+  type: AnswerType
+  mandatory: Boolean
+  questionPageId: ID
+  parentAnswerId: [ID]!
 }
 
 input UpdateAnswerInput {
@@ -306,11 +307,11 @@ input DeleteAnswerInput {
 }
 
 input DeleteCompositeAnswerInput{
-  id: [ID!]
+  id: ID!
 }
 
 input UnDeleteCompositeAnswerInput{
-  id: [ID!]
+  id: ID!
 }
 
 
