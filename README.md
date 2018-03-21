@@ -1,5 +1,7 @@
 # eq-author-graphql-schema
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/ONSdigital/eq-author-graphql-schema.svg)](https://greenkeeper.io/)
+
 GraphQL type definitions and schema for [eq-author](https://github.com/ONSdigital/eq-author).
 
 ## Publishing
