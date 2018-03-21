@@ -45,7 +45,7 @@ type QuestionPage implements Page {
   answers: [Answer]
   section: Section
   position: Int!
-  routingRuleSet: RoutingRuleSet!
+  routingRuleSet: RoutingRuleSet
 }
 
 interface Answer {
@@ -171,6 +171,7 @@ type Query {
   answer(id: ID!): Answer
   answers(ids: [ID]!): [Answer]
   option(id: ID!): Option
+  pagesAffectedByDeletion(id: ID!): [Page]
 }
 
 type Mutation {
