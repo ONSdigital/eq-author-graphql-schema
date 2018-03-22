@@ -64,6 +64,7 @@ type BasicAnswer implements Answer {
   guidance: String
   qCode: String
   label: String
+  secondaryLabel: String
   type: AnswerType!
   mandatory: Boolean
   page: QuestionPage
@@ -259,6 +260,7 @@ input CreateAnswerInput {
   description: String
   guidance: String
   label: String
+  secondaryLabel: String
   qCode: String
   type: AnswerType!
   mandatory: Boolean!
@@ -270,6 +272,7 @@ input UpdateAnswerInput {
   description: String
   guidance: String
   label: String
+  secondaryLabel: String 
   qCode: String
   type: AnswerType
   mandatory: Boolean
