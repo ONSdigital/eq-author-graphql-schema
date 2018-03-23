@@ -97,13 +97,18 @@ type RoutingRuleSet {
   id: ID!
   routingRules: [RoutingRule]
   questionPage: QuestionPage
+  else: RoutingDestination
 }
 
 type RoutingRule {
   id: ID!
   operation: RoutingOperation
   conditions: [RoutingCondition]
-  goto: Page
+  goto: RoutingDestination
+}
+
+type RoutingDestination {
+  page: Page!
 }
 
 type RoutingCondition {
@@ -113,15 +118,11 @@ type RoutingCondition {
   routingValue: RoutingConditionValue
 }
 
-type IntValue {
-  value: Int
+type IDArrayValue {
+  value: [ID]
 }
 
-type IntArrayValue {
-  value: [Int]
-}
-
-union RoutingConditionValue = IntValue | IntArrayValue
+union RoutingConditionValue = IDArrayValue
 
 enum RoutingOperation {
   And
@@ -171,7 +172,8 @@ type Query {
   answer(id: ID!): Answer
   answers(ids: [ID]!): [Answer]
   option(id: ID!): Option
-  pagesAffectedByDeletion(id: ID!): [Page]
+  pagesAffectedByDeletion(pageId: ID!): [Page]!
+  availableRoutingDestinations(pageId: ID!): [RoutingDestination]!
 }
 
 type Mutation {
@@ -381,7 +383,7 @@ input CreateRoutingRuleSetInput {
 
 input UpdateRoutingRuleSetInput {
   id: ID!
-  questionPageId: ID!
+  else: RoutingDestinationInput!
 }
 
 input DeleteRoutingRuleSetInput {
@@ -392,14 +394,14 @@ input CreateRoutingRuleInput {
   routingRuleSet: ID!
   operation: RoutingOperation
   conditions: [ID]
-  goto: ID
+  goto: RoutingDestinationInput
 }
 
 input UpdateRoutingRuleInput {
   id: ID!
   operation: RoutingOperation
   conditions: [ID]
-  goto: ID
+  goto: RoutingDestinationInput
 }
 
 input DeleteRoutingRuleInput {
@@ -424,7 +426,10 @@ input DeleteRoutingConditionInput {
 }
 
 input RoutingConditionValueInput {
-  intValue: Int
-  intArrayValue: [Int]
+  idArrayValue: [ID]
+}
+
+input RoutingDestinationInput {
+  pageId: ID!
 }
 `;
