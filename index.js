@@ -45,6 +45,7 @@ type QuestionPage implements Page {
   answers: [Answer]
   section: Section
   position: Int!
+  routingRuleSet: RoutingRuleSet
 }
 
 interface Answer {
@@ -92,6 +93,47 @@ type Option {
   answer: Answer
 }
 
+type RoutingRuleSet {
+  id: ID!
+  routingRules: [RoutingRule]
+  questionPage: QuestionPage
+  else: RoutingDestination
+}
+
+type RoutingRule {
+  id: ID!
+  operation: RoutingOperation
+  conditions: [RoutingCondition]
+  goto: RoutingDestination
+}
+
+type RoutingDestination {
+  page: Page!
+}
+
+type RoutingCondition {
+  id: ID!
+  comparator: RoutingComparator
+  answer: Answer
+  routingValue: RoutingConditionValue
+}
+
+type IDArrayValue {
+  value: [ID]
+}
+
+union RoutingConditionValue = IDArrayValue
+
+enum RoutingOperation {
+  And
+  Or
+}
+
+enum RoutingComparator {
+  Equal,
+  NotEqual
+}
+
 enum PageType {
   QuestionPage
   InterstitialPage
@@ -130,6 +172,8 @@ type Query {
   answer(id: ID!): Answer
   answers(ids: [ID]!): [Answer]
   option(id: ID!): Option
+  pagesAffectedByDeletion(pageId: ID!): [Page]!
+  availableRoutingDestinations(pageId: ID!): [RoutingDestination]!
 }
 
 type Mutation {
@@ -160,6 +204,15 @@ type Mutation {
   undeleteOption(input: UndeleteOptionInput!): Option
   createOtherAnswer(input: CreateOtherAnswerInput!): Answer
   deleteOtherAnswer(input: DeleteOtherAnswerInput!): Answer
+  createRoutingRuleSet(input: CreateRoutingRuleSetInput!): RoutingRuleSet
+  updateRoutingRuleSet(input: UpdateRoutingRuleSetInput!): RoutingRuleSet
+  deleteRoutingRuleSet(input: DeleteRoutingRuleSetInput!): RoutingRuleSet
+  createRoutingRule(input: CreateRoutingRuleInput!): RoutingRule
+  updateRoutingRule(input: UpdateRoutingRuleInput!): RoutingRule
+  deleteRoutingRule(input: DeleteRoutingRuleInput!): RoutingRule
+  createRoutingCondition(input: CreateRoutingConditionInput!): RoutingCondition
+  updateRoutingCondition(input: UpdateRoutingConditionInput!): RoutingCondition
+  deleteRoutingCondition(input: DeleteRoutingConditionInput!): RoutingCondition
 }
 
 input CreateQuestionnaireInput {
@@ -324,4 +377,59 @@ input DeleteOtherAnswerInput {
   parentAnswerId: ID!
 }
 
+input CreateRoutingRuleSetInput {
+  questionPageId: ID!
+}
+
+input UpdateRoutingRuleSetInput {
+  id: ID!
+  else: RoutingDestinationInput!
+}
+
+input DeleteRoutingRuleSetInput {
+  id: ID!
+}
+
+input CreateRoutingRuleInput {
+  routingRuleSet: ID!
+  operation: RoutingOperation
+  conditions: [ID]
+  goto: RoutingDestinationInput
+}
+
+input UpdateRoutingRuleInput {
+  id: ID!
+  operation: RoutingOperation
+  conditions: [ID]
+  goto: RoutingDestinationInput
+}
+
+input DeleteRoutingRuleInput {
+  id: ID!
+}
+
+input CreateRoutingConditionInput {
+  comparator: RoutingComparator!
+  answerId: ID!
+  routingValue: RoutingConditionValueInput!
+}
+
+input UpdateRoutingConditionInput {
+  id: ID!
+  comparator: RoutingComparator
+  answerId: ID
+  routingValue: RoutingConditionValueInput
+}
+
+input DeleteRoutingConditionInput {
+  id: ID!
+}
+
+input RoutingConditionValueInput {
+  idArrayValue: [ID]
+}
+
+input RoutingDestinationInput {
+  pageId: ID!
+}
 `;
