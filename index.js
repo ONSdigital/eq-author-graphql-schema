@@ -80,7 +80,7 @@ type MultipleChoiceAnswer implements Answer {
   type: AnswerType!
   mandatory: Boolean
   options: [Option]
-  otherAnswer: BasicAnswer
+  other: Other
   page: QuestionPage
 }
 
@@ -91,6 +91,11 @@ type Option {
   value: String
   qCode: String
   answer: Answer
+}
+
+type Other {
+  otherOption: Option!
+  otherAnswer: BasicAnswer!
 }
 
 type RoutingRuleSet {
