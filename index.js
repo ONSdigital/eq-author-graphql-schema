@@ -207,8 +207,8 @@ type Mutation {
   updateOption(input: UpdateOptionInput!): Option
   deleteOption(input: DeleteOptionInput!): Option
   undeleteOption(input: UndeleteOptionInput!): Option
-  createOtherAnswer(input: CreateOtherAnswerInput!): Answer
-  deleteOtherAnswer(input: DeleteOtherAnswerInput!): Answer
+  createOther(input: CreateOtherInput!): OptionWithAnswer
+  deleteOther(input: DeleteOtherInput!): OptionWithAnswer
   createRoutingRuleSet(input: CreateRoutingRuleSetInput!): RoutingRuleSet
   updateRoutingRuleSet(input: UpdateRoutingRuleSetInput!): RoutingRuleSet
   deleteRoutingRuleSet(input: DeleteRoutingRuleSetInput!): RoutingRuleSet
@@ -374,11 +374,11 @@ input MovePageInput {
   position: Int!
 }
 
-input CreateOtherAnswerInput {
+input CreateOtherInput {
   parentAnswerId: ID!
 }
 
-input DeleteOtherAnswerInput {
+input DeleteOtherInput {
   parentAnswerId: ID!
 }
 
