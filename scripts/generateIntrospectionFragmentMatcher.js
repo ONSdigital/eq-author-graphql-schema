@@ -34,7 +34,7 @@ const fragmentMatcherQuery = `
 
 const fetchIntrospectionFragmentMatcher = (typeDefs)  => {
 
-  const schema = makeExecutableSchema({ typeDefs });
+  const schema = makeExecutableSchema({ typeDefs, resolverValidationOptions: {requireResolversForResolveType: false} });
 
   return graphql(schema, fragmentMatcherQuery).then(result => {
     result.data.__schema.types = result.data.__schema.types.filter(
