@@ -211,13 +211,14 @@ type Mutation {
   deleteOther(input: DeleteOtherInput!): OptionWithAnswer
   createRoutingRuleSet(input: CreateRoutingRuleSetInput!): RoutingRuleSet
   updateRoutingRuleSet(input: UpdateRoutingRuleSetInput!): RoutingRuleSet
-  deleteRoutingRuleSet(input: DeleteRoutingRuleSetInput!): RoutingRuleSet
   createRoutingRule(input: CreateRoutingRuleInput!): RoutingRule
   updateRoutingRule(input: UpdateRoutingRuleInput!): RoutingRule
   deleteRoutingRule(input: DeleteRoutingRuleInput!): RoutingRule
+  undeleteRoutingRule(input: UndeleteRoutingRuleInput!): RoutingRule
   createRoutingCondition(input: CreateRoutingConditionInput!): RoutingCondition
-  updateRoutingCondition(input: UpdateRoutingConditionInput!): RoutingCondition
+  updateRoutingConditionAnswer(input: UpdateRoutingConditionAnswerInput!): RoutingCondition
   deleteRoutingCondition(input: DeleteRoutingConditionInput!): RoutingCondition
+  toggleConditionOption(input: ToggleConditionOptionInput!): RoutingConditionValue
 }
 
 input CreateQuestionnaireInput {
@@ -391,21 +392,15 @@ input UpdateRoutingRuleSetInput {
   else: RoutingDestinationInput!
 }
 
-input DeleteRoutingRuleSetInput {
-  id: ID!
-}
-
 input CreateRoutingRuleInput {
-  routingRuleSet: ID!
-  operation: RoutingOperation
-  conditions: [ID]
+  operation: RoutingOperation!
+  routingRuleSetId: ID!
   goto: RoutingDestinationInput
 }
 
 input UpdateRoutingRuleInput {
   id: ID!
   operation: RoutingOperation
-  conditions: [ID]
   goto: RoutingDestinationInput
 }
 
@@ -413,25 +408,29 @@ input DeleteRoutingRuleInput {
   id: ID!
 }
 
+input UndeleteRoutingRuleInput {
+  id: ID!
+}
+
 input CreateRoutingConditionInput {
   comparator: RoutingComparator!
   answerId: ID!
-  routingValue: RoutingConditionValueInput!
+  routingRuleId: ID!
 }
 
-input UpdateRoutingConditionInput {
+input UpdateRoutingConditionAnswerInput {
   id: ID!
-  comparator: RoutingComparator
   answerId: ID
-  routingValue: RoutingConditionValueInput
 }
 
 input DeleteRoutingConditionInput {
   id: ID!
 }
 
-input RoutingConditionValueInput {
-  idArrayValue: [ID]
+input ToggleConditionOptionInput {
+  optionId: ID!
+  conditionId: ID!
+  checked: Boolean!
 }
 
 input RoutingDestinationInput {
