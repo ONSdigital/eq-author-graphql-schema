@@ -112,9 +112,7 @@ type RoutingRule {
   goto: RoutingDestination
 }
 
-type RoutingDestination {
-  page: Page!
-}
+union RoutingDestination = QuestionPage | Section 
 
 type RoutingCondition {
   id: ID!
@@ -211,6 +209,7 @@ type Mutation {
   deleteOther(input: DeleteOtherInput!): OptionWithAnswer
   createRoutingRuleSet(input: CreateRoutingRuleSetInput!): RoutingRuleSet
   updateRoutingRuleSet(input: UpdateRoutingRuleSetInput!): RoutingRuleSet
+  resetRoutingRuleSetElse(input: ResetRoutingRuleSetElseInput!): RoutingRuleSet
   createRoutingRule(input: CreateRoutingRuleInput!): RoutingRule
   updateRoutingRule(input: UpdateRoutingRuleInput!): RoutingRule
   deleteRoutingRule(input: DeleteRoutingRuleInput!): RoutingRule
@@ -392,6 +391,10 @@ input UpdateRoutingRuleSetInput {
   else: RoutingDestinationInput!
 }
 
+input ResetRoutingRuleSetElseInput {
+  id: ID!
+}
+
 input CreateRoutingRuleInput {
   operation: RoutingOperation!
   routingRuleSetId: ID!
@@ -434,6 +437,7 @@ input ToggleConditionOptionInput {
 }
 
 input RoutingDestinationInput {
-  pageId: ID!
+  sectionId: ID!
+  pageId: ID
 }
 `;
