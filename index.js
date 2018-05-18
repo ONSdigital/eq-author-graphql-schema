@@ -117,6 +117,7 @@ union RoutingDestination = QuestionPage | Section
 type RoutingCondition {
   id: ID!
   comparator: RoutingComparator
+  questionPage: QuestionPage
   answer: Answer
   routingValue: RoutingConditionValue
 }
@@ -215,7 +216,7 @@ type Mutation {
   deleteRoutingRule(input: DeleteRoutingRuleInput!): RoutingRule
   undeleteRoutingRule(input: UndeleteRoutingRuleInput!): RoutingRule
   createRoutingCondition(input: CreateRoutingConditionInput!): RoutingCondition
-  updateRoutingConditionAnswer(input: UpdateRoutingConditionAnswerInput!): RoutingCondition
+  updateRoutingCondition(input: UpdateRoutingConditionInput!): RoutingCondition
   deleteRoutingCondition(input: DeleteRoutingConditionInput!): RoutingCondition
   toggleConditionOption(input: ToggleConditionOptionInput!): RoutingConditionValue
 }
@@ -417,12 +418,14 @@ input UndeleteRoutingRuleInput {
 
 input CreateRoutingConditionInput {
   comparator: RoutingComparator!
-  answerId: ID!
+  questionPageId: ID!
+  answerId: ID
   routingRuleId: ID!
 }
 
-input UpdateRoutingConditionAnswerInput {
+input UpdateRoutingConditionInput {
   id: ID!
+  questionPageId: ID!
   answerId: ID
 }
 
