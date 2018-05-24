@@ -5,9 +5,9 @@ type User {
   name: String!
 }
 
-type Markup {
-  html: String!
-  text: String!
+enum Format {
+  HTML
+  Plaintext
 }
 
 type Questionnaire {
@@ -26,8 +26,7 @@ type Questionnaire {
 
 type Section {
   id: ID!
-  title: String!
-  titleNew: Markup!
+  title(format: Format = HTML): String!
   description: String
   pages: [Page]
   questionnaire: Questionnaire
@@ -44,8 +43,7 @@ interface Page {
 
 type QuestionPage implements Page {
   id: ID!
-  title: String!
-  titleNew: Markup!
+  title(format: Format = HTML): String!
   description: String!
   guidance: String
   pageType: PageType!
@@ -228,11 +226,6 @@ type Mutation {
   toggleConditionOption(input: ToggleConditionOptionInput!): RoutingConditionValue
 }
 
-input MarkupInput {
-  html: String
-  text: String
-}
-
 input CreateQuestionnaireInput {
   title: String!
   description: String
@@ -265,7 +258,6 @@ input UndeleteQuestionnaireInput {
 
 input CreateSectionInput {
   title: String!
-  titleNew: MarkupInput
   description: String
   questionnaireId: ID!
 }
@@ -273,7 +265,6 @@ input CreateSectionInput {
 input UpdateSectionInput {
   id: ID!
   title: String
-  titleNew: MarkupInput
   description: String
 }
 
@@ -308,7 +299,6 @@ input UndeletePageInput {
 
 input CreateQuestionPageInput {
   title: String!
-  titleNew: MarkupInput
   description: String
   guidance: String
   sectionId: ID!
@@ -318,7 +308,6 @@ input CreateQuestionPageInput {
 input UpdateQuestionPageInput {
   id: ID!
   title: String
-  titleNew: MarkupInput
   description: String
   guidance: String
 }
