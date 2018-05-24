@@ -5,7 +5,7 @@ type User {
   name: String!
 }
 
-enum Format {
+enum TextFormat {
   HTML
   Plaintext
 }
@@ -26,7 +26,7 @@ type Questionnaire {
 
 type Section {
   id: ID!
-  title(format: Format = HTML): String!
+  title(format: TextFormat = HTML): String!
   description: String
   pages: [Page]
   questionnaire: Questionnaire
@@ -43,7 +43,7 @@ interface Page {
 
 type QuestionPage implements Page {
   id: ID!
-  title(format: Format = HTML): String!
+  title(format: TextFormat = HTML): String!
   description: String!
   guidance: String
   pageType: PageType!
