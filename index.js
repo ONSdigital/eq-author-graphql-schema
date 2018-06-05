@@ -215,6 +215,7 @@ type Mutation {
   deleteOther(input: DeleteOtherInput!): OptionWithAnswer
   createRoutingRuleSet(input: CreateRoutingRuleSetInput!): RoutingRuleSet
   updateRoutingRuleSet(input: UpdateRoutingRuleSetInput!): RoutingRuleSet
+  deleteRoutingRuleSet(input: DeleteRoutingRuleSetInput!): RoutingRuleSet
   resetRoutingRuleSetElse(input: ResetRoutingRuleSetElseInput!): RoutingRuleSet
   createRoutingRule(input: CreateRoutingRuleInput!): RoutingRule
   updateRoutingRule(input: UpdateRoutingRuleInput!): RoutingRule
@@ -395,6 +396,10 @@ input CreateRoutingRuleSetInput {
 input UpdateRoutingRuleSetInput {
   id: ID!
   else: RoutingDestinationInput!
+}
+
+input DeleteRoutingRuleSetInput {
+  id: ID!
 }
 
 input ResetRoutingRuleSetElseInput {
