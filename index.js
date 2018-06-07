@@ -130,11 +130,11 @@ enum AbsoluteDestinationTypes {
 union AbsoluteDestinations = QuestionPage | Section
 
 type AbsoluteDestination {
-  destination: AbsoluteDestinations!
+  absoluteDestination: AbsoluteDestinations!
 }
 
 type LogicalDestination {
-  destination: LogicalDestinations!
+  logicalDestination: LogicalDestinations!
 }
 
 union RoutingDestination = AbsoluteDestination | LogicalDestination
