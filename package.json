@@ -1,6 +1,6 @@
 {
   "name": "eq-author-graphql-schema",
-  "version": "0.14.1",
+  "version": "0.14.2",
   "files": [
     "index.js",
     "fragmentTypes.json"
