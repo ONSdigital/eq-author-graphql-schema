@@ -117,7 +117,22 @@ type RoutingRule {
   goto: RoutingDestination
 }
 
-union RoutingDestination = QuestionPage | Section 
+enum LogicalDestinations {
+  NextPage
+  EndOfQuestionnnaire
+}
+
+union AbsoluteDestinations = QuestionPage | Section
+
+type AbsoluteDesintation {
+  destination: AbsoluteDestinations!
+}
+
+type LogicalDestination {
+  destination: LogicalDestinations!
+}
+
+union RoutingDestination = AbsoluteDesintation | LogicalDestination
 
 type RoutingCondition {
   id: ID!
