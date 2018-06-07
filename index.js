@@ -119,7 +119,7 @@ type RoutingRule {
 
 enum LogicalDestinations {
   NextPage
-  EndOfQuestionnnaire
+  EndOfQuestionnaire
 }
 
 enum AbsoluteDestinationTypes {
@@ -129,15 +129,15 @@ enum AbsoluteDestinationTypes {
 
 union AbsoluteDestinations = QuestionPage | Section
 
-type AbsoluteDesintation {
-  destination: AbsoluteDestinations!
+type AbsoluteDestination {
+  absoluteDestination: AbsoluteDestinations!
 }
 
 type LogicalDestination {
-  destination: LogicalDestinations!
+  logicalDestination: LogicalDestinations!
 }
 
-union RoutingDestination = AbsoluteDesintation | LogicalDestination
+union RoutingDestination = AbsoluteDestination | LogicalDestination
 
 type RoutingCondition {
   id: ID!
@@ -429,7 +429,6 @@ input ResetRoutingRuleSetElseInput {
 input CreateRoutingRuleInput {
   operation: RoutingOperation!
   routingRuleSetId: ID!
-  goto: RoutingDestinationInput
 }
 
 input UpdateRoutingRuleInput {
