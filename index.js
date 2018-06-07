@@ -117,7 +117,27 @@ type RoutingRule {
   goto: RoutingDestination
 }
 
-union RoutingDestination = QuestionPage | Section 
+enum LogicalDestinations {
+  NextPage
+  EndOfQuestionnnaire
+}
+
+enum AbsoluteDestinationTypes {
+  Section
+  QuestionPage
+}
+
+union AbsoluteDestinations = QuestionPage | Section
+
+type AbsoluteDesintation {
+  destination: AbsoluteDestinations!
+}
+
+type LogicalDestination {
+  destination: LogicalDestinations!
+}
+
+union RoutingDestination = AbsoluteDesintation | LogicalDestination
 
 type RoutingCondition {
   id: ID!
@@ -449,8 +469,17 @@ input ToggleConditionOptionInput {
   checked: Boolean!
 }
 
+input LogicalDestinationInput {
+  destinationType: LogicalDestinations!
+}
+
+input AbsoluteDestinationInput {
+  destinationType: AbsoluteDestinationTypes!
+  destinationId: ID!
+}
+
 input RoutingDestinationInput {
-  sectionId: ID!
-  pageId: ID
+  logicalDestination: LogicalDestinationInput
+  absoluteDestination: AbsoluteDestinationInput
 }
 `;
