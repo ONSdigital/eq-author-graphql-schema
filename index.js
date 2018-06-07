@@ -122,6 +122,11 @@ enum LogicalDestinations {
   EndOfQuestionnnaire
 }
 
+enum AbsoluteDestinationTypes {
+  Section
+  QuestionPage
+}
+
 union AbsoluteDestinations = QuestionPage | Section
 
 type AbsoluteDesintation {
@@ -464,8 +469,17 @@ input ToggleConditionOptionInput {
   checked: Boolean!
 }
 
+input LogicalDestinationInput {
+  destinationType: LogicalDestinations!
+}
+
+input AbsoluteDestinationInput {
+  destinationType: AbsoluteDestinationTypes!
+  destinationId: ID!
+}
+
 input RoutingDestinationInput {
-  sectionId: ID!
-  pageId: ID
+  logicalDestination: LogicalDestinationInput
+  absoluteDestination: AbsoluteDestinationInput
 }
 `;
