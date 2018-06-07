@@ -429,7 +429,6 @@ input ResetRoutingRuleSetElseInput {
 input CreateRoutingRuleInput {
   operation: RoutingOperation!
   routingRuleSetId: ID!
-  goto: RoutingDestinationInput
 }
 
 input UpdateRoutingRuleInput {
