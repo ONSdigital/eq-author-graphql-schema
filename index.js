@@ -139,6 +139,12 @@ type LogicalDestination {
 
 union RoutingDestination = AbsoluteDestination | LogicalDestination
 
+type AvailableRoutingDestinations {
+  logicalDestinations: [LogicalDestination]!
+  questionPages: [QuestionPage]!
+  sections: [Section]!
+}
+
 type RoutingCondition {
   id: ID!
   comparator: RoutingComparator
@@ -202,7 +208,7 @@ type Query {
   answers(ids: [ID]!): [Answer]
   option(id: ID!): Option
   pagesAffectedByDeletion(pageId: ID!): [Page]!
-  availableRoutingDestinations(pageId: ID!): [RoutingDestination]!
+  availableRoutingDestinations(pageId: ID!): AvailableRoutingDestinations!
 }
 
 type Mutation {
