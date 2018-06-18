@@ -134,6 +134,7 @@ type AbsoluteDestination {
 }
 
 type LogicalDestination {
+  id: ID!
   logicalDestination: LogicalDestinations!
 }
 
