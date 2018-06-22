@@ -154,11 +154,11 @@ type RoutingCondition {
   routingValue: RoutingConditionValue
 }
 
-type IDArrayValue {
-  value: [ID]
+type IDValue {
+  value: ID
 }
 
-union RoutingConditionValue = IDArrayValue
+union RoutingConditionValue = IDValue
 
 enum RoutingOperation {
   And
@@ -166,8 +166,7 @@ enum RoutingOperation {
 }
 
 enum RoutingComparator {
-  Equal,
-  NotEqual
+  Equal
 }
 
 enum PageType {
@@ -251,7 +250,7 @@ type Mutation {
   createRoutingCondition(input: CreateRoutingConditionInput!): RoutingCondition
   updateRoutingCondition(input: UpdateRoutingConditionInput!): RoutingCondition
   deleteRoutingCondition(input: DeleteRoutingConditionInput!): RoutingCondition
-  toggleConditionOption(input: ToggleConditionOptionInput!): RoutingConditionValue
+  updateRoutingConditionValue(input: UpdateRoutingConditionValueInput!): RoutingConditionValue
 }
 
 input CreateQuestionnaireInput {
@@ -469,10 +468,9 @@ input DeleteRoutingConditionInput {
   id: ID!
 }
 
-input ToggleConditionOptionInput {
-  optionId: ID!
+input UpdateRoutingConditionValueInput {
+  optionId: ID
   conditionId: ID!
-  checked: Boolean!
 }
 
 input LogicalDestinationInput {
