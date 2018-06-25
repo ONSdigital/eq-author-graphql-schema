@@ -119,7 +119,7 @@ type RoutingRule {
 
 enum LogicalDestinations {
   NextPage
-  EndOfQuestionnnaire
+  EndOfQuestionnaire
 }
 
 enum AbsoluteDestinationTypes {
@@ -129,15 +129,22 @@ enum AbsoluteDestinationTypes {
 
 union AbsoluteDestinations = QuestionPage | Section
 
-type AbsoluteDesintation {
-  destination: AbsoluteDestinations!
+type AbsoluteDestination {
+  absoluteDestination: AbsoluteDestinations!
 }
 
 type LogicalDestination {
-  destination: LogicalDestinations!
+  id: ID!
+  logicalDestination: LogicalDestinations!
 }
 
-union RoutingDestination = AbsoluteDesintation | LogicalDestination
+union RoutingDestination = AbsoluteDestination | LogicalDestination
+
+type AvailableRoutingDestinations {
+  logicalDestinations: [LogicalDestination]!
+  questionPages: [QuestionPage]!
+  sections: [Section]!
+}
 
 type RoutingCondition {
   id: ID!
@@ -147,11 +154,11 @@ type RoutingCondition {
   routingValue: RoutingConditionValue
 }
 
-type IDArrayValue {
-  value: [ID]
+type IDValue {
+  value: ID
 }
 
-union RoutingConditionValue = IDArrayValue
+union RoutingConditionValue = IDValue
 
 enum RoutingOperation {
   And
@@ -159,8 +166,7 @@ enum RoutingOperation {
 }
 
 enum RoutingComparator {
-  Equal,
-  NotEqual
+  Equal
 }
 
 enum PageType {
@@ -202,7 +208,7 @@ type Query {
   answers(ids: [ID]!): [Answer]
   option(id: ID!): Option
   pagesAffectedByDeletion(pageId: ID!): [Page]!
-  availableRoutingDestinations(pageId: ID!): [RoutingDestination]!
+  availableRoutingDestinations(pageId: ID!): AvailableRoutingDestinations!
 }
 
 type Mutation {
@@ -244,7 +250,7 @@ type Mutation {
   createRoutingCondition(input: CreateRoutingConditionInput!): RoutingCondition
   updateRoutingCondition(input: UpdateRoutingConditionInput!): RoutingCondition
   deleteRoutingCondition(input: DeleteRoutingConditionInput!): RoutingCondition
-  toggleConditionOption(input: ToggleConditionOptionInput!): RoutingConditionValue
+  updateRoutingConditionValue(input: UpdateRoutingConditionValueInput!): RoutingConditionValue
 }
 
 input CreateQuestionnaireInput {
@@ -429,7 +435,6 @@ input ResetRoutingRuleSetElseInput {
 input CreateRoutingRuleInput {
   operation: RoutingOperation!
   routingRuleSetId: ID!
-  goto: RoutingDestinationInput
 }
 
 input UpdateRoutingRuleInput {
@@ -463,10 +468,9 @@ input DeleteRoutingConditionInput {
   id: ID!
 }
 
-input ToggleConditionOptionInput {
-  optionId: ID!
+input UpdateRoutingConditionValueInput {
+  optionId: ID
   conditionId: ID!
-  checked: Boolean!
 }
 
 input LogicalDestinationInput {
