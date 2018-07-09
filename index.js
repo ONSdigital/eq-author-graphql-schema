@@ -1,6 +1,8 @@
 module.exports = `
 scalar Date
 
+scalar JSON
+
 type User {
   name: String!
 }
@@ -60,8 +62,9 @@ interface Answer {
   qCode: String
   label: String
   type: AnswerType!
-  mandatory: Boolean
+  mandatory: Boolean @deprecated(reason: "Use \`properties\` instead.")
   page: QuestionPage
+  properties: JSON
 }
 
 type BasicAnswer implements Answer {
@@ -72,8 +75,9 @@ type BasicAnswer implements Answer {
   label: String
   secondaryLabel: String
   type: AnswerType!
-  mandatory: Boolean
+  mandatory: Boolean @deprecated(reason: "Use \`properties\` instead.")
   page: QuestionPage
+  properties: JSON
 }
 
 type MultipleChoiceAnswer implements Answer {
@@ -83,10 +87,11 @@ type MultipleChoiceAnswer implements Answer {
   qCode: String
   label: String
   type: AnswerType!
-  mandatory: Boolean
+  mandatory: Boolean @deprecated(reason: "Use \`properties\` instead.")
   options: [Option]
   other: OptionWithAnswer
   page: QuestionPage
+  properties: JSON
 }
 
 type Option {
@@ -354,7 +359,7 @@ input CreateAnswerInput {
   secondaryLabel: String
   qCode: String
   type: AnswerType!
-  mandatory: Boolean!
+  mandatory: Boolean @deprecated(reason: "Use \`properties\` instead.")
   questionPageId: ID!
 }
 
@@ -366,7 +371,8 @@ input UpdateAnswerInput {
   secondaryLabel: String 
   qCode: String
   type: AnswerType
-  mandatory: Boolean
+  mandatory: Boolean @deprecated(reason: "Use \`properties\` instead.")
+  properties: JSON
 }
 
 input DeleteAnswerInput {
