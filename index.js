@@ -32,6 +32,7 @@ type Section {
   description: String
   pages: [Page]
   questionnaire: Questionnaire
+  position: Int!
 }
 
 interface Page {
@@ -225,6 +226,7 @@ type Mutation {
   updateSection(input: UpdateSectionInput!): Section
   deleteSection(input: DeleteSectionInput!): Section
   undeleteSection(input: UndeleteSectionInput!): Section
+  moveSection(input: MoveSectionInput!): Section
   createPage(input: CreatePageInput!): Page
   updatePage(input: UpdatePageInput!): Page
   deletePage(input: DeletePageInput!): Page
@@ -292,6 +294,7 @@ input CreateSectionInput {
   title: String!
   description: String
   questionnaireId: ID!
+  position: Int
 }
 
 input UpdateSectionInput {
@@ -410,6 +413,12 @@ input UndeleteOptionInput {
 input MovePageInput {
   id: ID!
   sectionId: ID!
+  position: Int!
+}
+
+input MoveSectionInput {
+  id: ID!
+  questionnaireId: ID!
   position: Int!
 }
 
