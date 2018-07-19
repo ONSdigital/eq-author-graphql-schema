@@ -95,6 +95,19 @@ type MultipleChoiceAnswer implements Answer {
   properties: JSON
 }
 
+type CompositeAnswer implements Answer {
+  id: ID!
+  description: String
+  guidance: String
+  qCode: String
+  label: String
+  type: AnswerType!
+  mandatory: Boolean @deprecated(reason: "Use \`properties\` instead.")
+  page: QuestionPage
+  childAnswers: [BasicAnswer]!
+  properties: JSON
+}
+
 type Option {
   id: ID!
   label: String
@@ -377,7 +390,7 @@ input UpdateAnswerInput {
   mandatory: Boolean @deprecated(reason: "Use \`properties\` instead.")
   properties: JSON
 }
-
+ 
 input DeleteAnswerInput {
   id: ID!
 }
