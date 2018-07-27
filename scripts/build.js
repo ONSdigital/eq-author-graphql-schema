@@ -16,36 +16,16 @@ const getMasterSchema = async () => {
   return schema;
 };
 
-const createSchema = typeDefs => {
+const createSchema = typeDefs =>
   makeExecutableSchema({
     typeDefs,
     resolverValidationOptions: { requireResolversForResolveType: false }
   });
-};
-
-try {
-  makeExecutableSchema({
-    typeDefs: schema,
-    resolverValidationOptions: { requireResolversForResolveType: false }
-  });
-  console.log(chalk.green("Valid schema"));
-} catch (e) {
-  console.error(chalk.red("Invalid schema:"));
-  console.error(e.message);
-
-  process.exitCode = 1;
-  return;
-}
 
 const findBreakingChangesBetweenCurrentAndPrevious = (oldSchema, newSchema) => {
-  const oldSchemaAST = makeExecutableSchema({
-    typeDefs: oldSchema,
-    resolverValidationOptions: { requireResolversForResolveType: false }
-  });
-  const newSchemaAST = makeExecutableSchema({
-    typeDefs: newSchema,
-    resolverValidationOptions: { requireResolversForResolveType: false }
-  });
+  const oldSchemaAST = createSchema(oldSchema);
+  const newSchemaAST = createSchema(newSchema);
+
   const breakages = findBreakingChanges(oldSchemaAST, newSchemaAST);
 
   if (breakages.length === 0) {
@@ -63,12 +43,31 @@ const findBreakingChangesBetweenCurrentAndPrevious = (oldSchema, newSchema) => {
   }
 };
 
+const deleteClonedRepo = () => {
+  del(["scripts/previousSchema"]).then(paths => {
+    console.log("Deleted files and folders:\n", paths.join("\n"));
+  });
+};
+
+try {
+  createSchema(schema);
+  console.log(chalk.green("Valid schema"));
+} catch (e) {
+  console.error(chalk.red("Invalid schema:"));
+  console.error(e.message);
+
+  process.exitCode = 1;
+  return;
+}
+
 getMasterSchema()
   .then(oldSchema => {
     findBreakingChangesBetweenCurrentAndPrevious(oldSchema, schema);
   })
   .then(() => {
-    del(["scripts/previousSchema"]).then(paths => {
-      console.log("Deleted files and folders:\n", paths.join("\n"));
-    });
+    deleteClonedRepo();
+  })
+  .catch(error => {
+    console.error(chalk.red(error));
+    deleteClonedRepo();
   });
