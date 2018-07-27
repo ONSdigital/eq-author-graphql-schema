@@ -3,7 +3,7 @@
 const { makeExecutableSchema } = require("graphql-tools");
 const { graphql } = require("graphql");
 const chalk = require("chalk");
-const schema = require("../schema");
+const schema = require("../");
 const fs = require("fs");
 
 const writeFile = (path, contents) => {

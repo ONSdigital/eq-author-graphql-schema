@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const chalk = require("chalk");
-const schema = require("../schema");
+const schema = require("../");
 const { buildSchema } = require("graphql");
 const { makeExecutableSchema } = require("graphql-tools");
 const childProcess = require("child_process");
