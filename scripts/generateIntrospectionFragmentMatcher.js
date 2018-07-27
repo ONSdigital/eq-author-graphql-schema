@@ -16,7 +16,7 @@ const writeFile = (path, contents) => {
       }
     });
   });
-}
+};
 
 const fragmentMatcherQuery = `
   query Introspection {
@@ -32,9 +32,11 @@ const fragmentMatcherQuery = `
   }
 `;
 
-const fetchIntrospectionFragmentMatcher = (typeDefs)  => {
-
-  const schema = makeExecutableSchema({ typeDefs, resolverValidationOptions: {requireResolversForResolveType: false} });
+const fetchIntrospectionFragmentMatcher = typeDefs => {
+  const schema = makeExecutableSchema({
+    typeDefs,
+    resolverValidationOptions: { requireResolversForResolveType: false }
+  });
 
   return graphql(schema, fragmentMatcherQuery).then(result => {
     result.data.__schema.types = result.data.__schema.types.filter(
@@ -43,18 +45,20 @@ const fetchIntrospectionFragmentMatcher = (typeDefs)  => {
 
     return result.data;
   });
-}
+};
 
 const generateIntrospectionFragmentMatcher = (schema, outPath) => {
   return fetchIntrospectionFragmentMatcher(schema).then(result =>
     writeFile(outPath, JSON.stringify(result))
-  )
-}
+  );
+};
 
-const fileName = "./fragmentTypes.json"
+const fileName = "./fragmentTypes.json";
 
-generateIntrospectionFragmentMatcher(schema, fileName).then(res => {
-  console.log(chalk.green("Fragment types file built at " + fileName));
-}).catch(e => {
-  console.error(chalk.red("Fragment types file build failed: "), e);
-})
+generateIntrospectionFragmentMatcher(schema, fileName)
+  .then(res => {
+    console.log(chalk.green("Fragment types file built at " + fileName));
+  })
+  .catch(e => {
+    console.error(chalk.red("Fragment types file build failed: "), e);
+  });

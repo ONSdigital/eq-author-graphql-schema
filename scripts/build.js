@@ -2,21 +2,55 @@
 
 const chalk = require("chalk");
 const schema = require("../");
-const { buildSchema } = require("graphql");
+const { makeExecutableSchema } = require("graphql-tools");
 const childProcess = require("child_process");
-const fs = require("fs");
 const findBreakingChanges = require("./findBreakingChanges");
+const del = require("del");
 
-const getMasterSchema = () => {
-  childProcess.execSync("git show master:index.js > ./scripts/temp.js");
-  const schema = require("./temp.js");
-  fs.unlinkSync("./scripts/temp.js");
+const getMasterSchema = async () => {
+  await childProcess.execSync(
+    "git clone https://github.com/ONSdigital/eq-author-graphql-schema.git scripts/previousSchema"
+  );
+  const schema = require("./previousSchema");
 
   return schema;
 };
 
+const createSchema = typeDefs =>
+  makeExecutableSchema({
+    typeDefs,
+    resolverValidationOptions: { requireResolversForResolveType: false }
+  });
+
+const findBreakingChangesBetweenCurrentAndPrevious = (oldSchema, newSchema) => {
+  const oldSchemaAST = createSchema(oldSchema);
+  const newSchemaAST = createSchema(newSchema);
+
+  const breakages = findBreakingChanges(oldSchemaAST, newSchemaAST);
+
+  if (breakages.length === 0) {
+    console.log(chalk.green("Changes are backwards compatible"));
+  } else {
+    console.error(chalk.red("Breaking changes found"));
+    console.error("Please deprecate these fields instead of removing:");
+
+    breakages.forEach(breakage => {
+      console.error(`  ${breakage.type}: ${breakage.description}`);
+    });
+    console.log();
+
+    process.exitCode = 1;
+  }
+};
+
+const deleteClonedRepo = () => {
+  del(["scripts/previousSchema"]).then(paths => {
+    console.log("Deleted files and folders:\n", paths.join("\n"));
+  });
+};
+
 try {
-  buildSchema(schema);
+  createSchema(schema);
   console.log(chalk.green("Valid schema"));
 } catch (e) {
   console.error(chalk.red("Invalid schema:"));
@@ -26,20 +60,14 @@ try {
   return;
 }
 
-const oldSchema = buildSchema(getMasterSchema());
-const newSchema = buildSchema(schema);
-const breakages = findBreakingChanges(oldSchema, newSchema);
-
-if (breakages.length === 0) {
-  console.log(chalk.green("Changes are backwards compatible"));
-} else {
-  console.error(chalk.red("Breaking changes found"));
-  console.error("Please deprecate these fields instead of removing:");
-
-  breakages.forEach(breakage => {
-    console.error(`  ${breakage.type}: ${breakage.description}`);
+getMasterSchema()
+  .then(oldSchema => {
+    findBreakingChangesBetweenCurrentAndPrevious(oldSchema, schema);
+  })
+  .then(() => {
+    deleteClonedRepo();
+  })
+  .catch(error => {
+    console.error(chalk.red(error));
+    deleteClonedRepo();
   });
-  console.log();
-
-  process.exitCode = 1;
-}
