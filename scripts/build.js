@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
 const chalk = require("chalk");
-const schema = require("../");
+const schema = require("../schema");
 const { buildSchema } = require("graphql");
+const { makeExecutableSchema } = require("graphql-tools");
 const childProcess = require("child_process");
 const fs = require("fs");
 const findBreakingChanges = require("./findBreakingChanges");
@@ -16,7 +17,10 @@ const getMasterSchema = () => {
 };
 
 try {
-  buildSchema(schema);
+  makeExecutableSchema({
+    typeDefs: schema,
+    resolverValidationOptions: { requireResolversForResolveType: false }
+  });
   console.log(chalk.green("Valid schema"));
 } catch (e) {
   console.error(chalk.red("Invalid schema:"));
@@ -27,7 +31,10 @@ try {
 }
 
 const oldSchema = buildSchema(getMasterSchema());
-const newSchema = buildSchema(schema);
+const newSchema = makeExecutableSchema({
+  typeDefs: schema,
+  resolverValidationOptions: { requireResolversForResolveType: false }
+});
 const breakages = findBreakingChanges(oldSchema, newSchema);
 
 if (breakages.length === 0) {
