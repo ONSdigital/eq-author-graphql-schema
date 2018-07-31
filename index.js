@@ -12,6 +12,10 @@ enum TextFormat {
   Plaintext
 }
 
+type QuestionnaireInfo {
+  totalSectionCount: Int!
+}
+
 type Questionnaire {
   id: ID!
   title: String
@@ -24,6 +28,7 @@ type Questionnaire {
   createdBy: User!
   sections: [Section]
   summary: Boolean
+  questionnaireInfo: QuestionnaireInfo
 }
 
 type Section {
