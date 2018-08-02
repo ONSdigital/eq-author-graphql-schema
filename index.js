@@ -84,6 +84,7 @@ type BasicAnswer implements Answer {
   mandatory: Boolean @deprecated(reason: "Use \`properties\` instead.")
   page: QuestionPage
   properties: JSON
+  validation: ValidationType
 }
 
 type MultipleChoiceAnswer implements Answer {
@@ -184,6 +185,24 @@ type IDArrayValue {
 
 union RoutingConditionValue = IDArrayValue
 
+union ValidationType = NumberValidation
+
+type NumberValidation {
+  minValue: MinValueValidationRule!
+}
+
+interface ValidationRule {
+  id: ID!
+  enabled: Boolean!
+}
+
+type MinValueValidationRule implements ValidationRule {
+  id: ID!
+  enabled: Boolean!
+  inclusive: Boolean!
+  custom: Int
+}
+
 enum RoutingOperation {
   And
   Or
@@ -276,6 +295,8 @@ type Mutation {
   updateRoutingCondition(input: UpdateRoutingConditionInput!): RoutingCondition
   deleteRoutingCondition(input: DeleteRoutingConditionInput!): RoutingCondition
   toggleConditionOption(input: ToggleConditionOptionInput!): RoutingConditionValue
+  toggleValidationRule(input: ToggleValidationRuleInput!): ValidationRule!
+  updateValidationRule(input: UpdateValidationRuleInput!): ValidationRule!
 }
 
 input CreateQuestionnaireInput {
@@ -519,5 +540,20 @@ input AbsoluteDestinationInput {
 input RoutingDestinationInput {
   logicalDestination: LogicalDestinationInput
   absoluteDestination: AbsoluteDestinationInput
+}
+
+input ToggleValidationRuleInput {
+  id: ID!
+  enabled: Boolean!
+}
+
+input UpdateValidationRuleInput {
+  id: ID!
+  minValueInput:  UpdateMinValueInput
+}
+
+input UpdateMinValueInput {
+  inclusive: Boolean!
+  custom: Int
 }
 `;
