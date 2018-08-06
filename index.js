@@ -34,7 +34,7 @@ type Questionnaire {
 type Section {
   id: ID!
   title(format: TextFormat = HTML): String!
-  description: String
+  description: String @deprecated(reason: "No longer required")
   pages: [Page]
   questionnaire: Questionnaire
   position: Int!
