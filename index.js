@@ -310,7 +310,7 @@ input UndeleteQuestionnaireInput {
 
 input CreateSectionInput {
   title: String!
-  description: String
+  description: String @deprecated(reason: "No longer required")
   questionnaireId: ID!
   position: Int
 }
@@ -318,7 +318,7 @@ input CreateSectionInput {
 input UpdateSectionInput {
   id: ID!
   title: String
-  description: String
+  description: String @deprecated(reason: "No longer required")
 }
 
 input DeleteSectionInput {
