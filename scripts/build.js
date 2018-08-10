@@ -64,10 +64,9 @@ getMasterSchema()
   .then(oldSchema => {
     findBreakingChangesBetweenCurrentAndPrevious(oldSchema, schema);
   })
-  .then(() => {
-    deleteClonedRepo();
-  })
   .catch(error => {
     console.error(chalk.red(error));
+  })
+  .finally(() => {
     deleteClonedRepo();
   });

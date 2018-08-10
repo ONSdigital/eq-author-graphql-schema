@@ -1,10 +1,5 @@
 module.exports = `  
 
-  extend type Query {
-    pagesAffectedByDeletion(pageId: ID!): [Page]!
-    availableRoutingDestinations(pageId: ID!): AvailableRoutingDestinations!
-  }
-
   type RoutingRuleSet {
     id: ID!
     routingRules: [RoutingRule]
@@ -69,26 +64,6 @@ module.exports = `
 
   enum RoutingComparator {
     Equal
-  }
-
-  extend type Mutation {
-    createRoutingRuleSet(input: CreateRoutingRuleSetInput!): RoutingRuleSet
-    updateRoutingRuleSet(input: UpdateRoutingRuleSetInput!): RoutingRuleSet
-    deleteRoutingRuleSet(input: DeleteRoutingRuleSetInput!): RoutingRuleSet
-    resetRoutingRuleSetElse(input: ResetRoutingRuleSetElseInput!): RoutingRuleSet
-
-    createRoutingRule(input: CreateRoutingRuleInput!): RoutingRule
-    updateRoutingRule(input: UpdateRoutingRuleInput!): RoutingRule
-    deleteRoutingRule(input: DeleteRoutingRuleInput!): RoutingRule
-    undeleteRoutingRule(input: UndeleteRoutingRuleInput!): RoutingRule
-
-    createRoutingCondition(input: CreateRoutingConditionInput!): RoutingCondition
-    updateRoutingCondition(input: UpdateRoutingConditionInput!): RoutingCondition
-    deleteRoutingCondition(input: DeleteRoutingConditionInput!): RoutingCondition
-
-    toggleConditionOption(
-      input: ToggleConditionOptionInput!
-    ): RoutingConditionValue
   }
 
   input CreateRoutingRuleSetInput {
