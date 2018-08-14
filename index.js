@@ -189,6 +189,7 @@ union ValidationType = NumberValidation
 
 type NumberValidation {
   minValue: MinValueValidationRule!
+  maxValue: MaxValueValidationRule!
 }
 
 interface ValidationRule {
@@ -197,6 +198,13 @@ interface ValidationRule {
 }
 
 type MinValueValidationRule implements ValidationRule {
+  id: ID!
+  enabled: Boolean!
+  inclusive: Boolean!
+  custom: Int
+}
+
+type MaxValueValidationRule implements ValidationRule {
   id: ID!
   enabled: Boolean!
   inclusive: Boolean!
@@ -550,9 +558,15 @@ input ToggleValidationRuleInput {
 input UpdateValidationRuleInput {
   id: ID!
   minValueInput:  UpdateMinValueInput
+  maxValueInput:  UpdateMaxValueInput
 }
 
 input UpdateMinValueInput {
+  inclusive: Boolean!
+  custom: Int
+}
+
+input UpdateMaxValueInput {
   inclusive: Boolean!
   custom: Int
 }
