@@ -267,16 +267,19 @@ type Mutation {
   updateQuestionnaire(input: UpdateQuestionnaireInput!): Questionnaire
   deleteQuestionnaire(input: DeleteQuestionnaireInput!): Questionnaire
   undeleteQuestionnaire(input: UndeleteQuestionnaireInput!): Questionnaire
+  duplicateQuestionnaire(input: DuplicateQuestionnaireInput!): Questionnaire
   createSection(input: CreateSectionInput!): Section
   updateSection(input: UpdateSectionInput!): Section
   deleteSection(input: DeleteSectionInput!): Section
   undeleteSection(input: UndeleteSectionInput!): Section
   moveSection(input: MoveSectionInput!): Section
+  duplicateSection(input: DuplicateSectionInput!): Section
   createPage(input: CreatePageInput!): Page
   updatePage(input: UpdatePageInput!): Page
   deletePage(input: DeletePageInput!): Page
   undeletePage(input: UndeletePageInput!): Page
   movePage(input: MovePageInput!): Page
+  duplicatePage(input: DuplicatePageInput!): Page
   createQuestionPage(input: CreateQuestionPageInput!): QuestionPage
   updateQuestionPage(input: UpdateQuestionPageInput!): QuestionPage
   deleteQuestionPage(input: DeleteQuestionPageInput!): QuestionPage
@@ -337,6 +340,10 @@ input UndeleteQuestionnaireInput {
   id: ID!
 }
 
+input DuplicateQuestionnaireInput {
+  id: ID!
+}
+
 input CreateSectionInput {
   title: String!
   description: String @deprecated(reason: "No longer required")
@@ -358,6 +365,11 @@ input UndeleteSectionInput {
   id: ID!
 }
 
+input DuplicateSectionInput {
+  id: ID!
+  position: Int!
+}
+
 input CreatePageInput {
   title: String!
   description: String
@@ -377,6 +389,11 @@ input DeletePageInput {
 
 input UndeletePageInput {
   id: ID!
+}
+
+input DuplicatePageInput {
+  id: ID!
+  position: Int!
 }
 
 input CreateQuestionPageInput {
