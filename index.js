@@ -185,10 +185,14 @@ type IDArrayValue {
 
 union RoutingConditionValue = IDArrayValue
 
-union ValidationType = NumberValidation
+union ValidationType = NumberValidation | NullValidation
 
 type NumberValidation {
   minValue: MinValueValidationRule!
+}
+
+type NullValidation {
+  _empty: Boolean
 }
 
 interface ValidationRule {
