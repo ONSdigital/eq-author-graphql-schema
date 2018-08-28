@@ -97,6 +97,7 @@ type MultipleChoiceAnswer implements Answer {
   mandatory: Boolean @deprecated(reason: "Use \`properties\` instead.")
   options: [Option]
   other: OptionWithAnswer
+  mutuallyExclusiveOption: Option
   page: QuestionPage
   properties: JSON
 }
@@ -289,6 +290,7 @@ type Mutation {
   deleteAnswer(input: DeleteAnswerInput!): Answer
   undeleteAnswer(input: UndeleteAnswerInput!): Answer
   createOption(input: CreateOptionInput!): Option
+  createMutuallyExclusiveOption(input: CreateMutuallyExclusiveOptionInput!): Option
   updateOption(input: UpdateOptionInput!): Option
   deleteOption(input: DeleteOptionInput!): Option
   undeleteOption(input: UndeleteOptionInput!): Option
@@ -451,6 +453,14 @@ input UndeleteAnswerInput {
 }
 
 input CreateOptionInput {
+  label: String
+  description: String
+  value: String
+  qCode: String
+  answerId: ID!
+}
+
+input CreateMutuallyExclusiveOptionInput {
   label: String
   description: String
   value: String
