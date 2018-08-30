@@ -29,6 +29,7 @@ type Questionnaire {
   sections: [Section]
   summary: Boolean
   questionnaireInfo: QuestionnaireInfo
+  metadata: [Metadata!]!
 }
 
 type Section {
@@ -250,6 +251,37 @@ enum Theme {
   census
 }
 
+type Metadata {
+    id: ID!
+    key: String
+    alias: String
+    type: MetadataType!
+    dateValue: Date
+    regionValue: Region
+    languageValue: Language
+    textValue: String
+}
+
+enum MetadataType {
+    Date
+    Text
+    Region
+    Language
+}
+
+enum Region {
+    GB_ENG
+    GB_GBN
+    GB_NIR
+    GB_SCT
+    GB_WLS
+}
+
+enum Language {
+    en
+    cy
+}
+
 type Query {
   questionnaires: [Questionnaire]
   questionnaire(id: ID!): Questionnaire
@@ -310,6 +342,9 @@ type Mutation {
   toggleConditionOption(input: ToggleConditionOptionInput!): RoutingConditionValue
   toggleValidationRule(input: ToggleValidationRuleInput!): ValidationRule!
   updateValidationRule(input: UpdateValidationRuleInput!): ValidationRule!
+  createMetadata(input: CreateMetadataInput!): Metadata!
+  updateMetadata(input: UpdateMetadataInput!): Metadata!
+  deleteMetadata(input: DeleteMetadataInput!): Metadata!
 }
 
 input CreateQuestionnaireInput {
@@ -596,5 +631,24 @@ input UpdateMinValueInput {
 input UpdateMaxValueInput {
   inclusive: Boolean!
   custom: Int
+}
+
+input CreateMetadataInput {
+    questionnaireId: ID!
+}
+
+input DeleteMetadataInput {
+    id: ID!
+}
+
+input UpdateMetadataInput {
+    id: ID!
+    key: String
+    alias: String
+    type: MetadataType!
+    dateValue: Date
+    regionValue: Region
+    languageValue: Language
+    textValue: String
 }
 `;
