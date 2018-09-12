@@ -187,11 +187,15 @@ type IDArrayValue {
 
 union RoutingConditionValue = IDArrayValue
 
-union ValidationType = NumberValidation
+union ValidationType = NumberValidation | DateValidation
 
 type NumberValidation {
   minValue: MinValueValidationRule!
   maxValue: MaxValueValidationRule!
+}
+
+type DateValidation {
+  earliestDate: EarliestDateValidationRule!
 }
 
 interface ValidationRule {
@@ -211,6 +215,30 @@ type MaxValueValidationRule implements ValidationRule {
   enabled: Boolean!
   inclusive: Boolean!
   custom: Int
+}
+
+type EarliestDateValidationRule implements ValidationRule {
+  id: ID!
+  enabled: Boolean!
+  offset: Duration!
+  relativePosition: RelativePosition!
+  custom: Date
+}
+
+type Duration {
+  value: Int
+  unit: DurationUnit!
+}
+
+enum DurationUnit {
+  Days
+  Months
+  Years
+}
+
+enum RelativePosition {
+  Before
+  After
 }
 
 enum RoutingOperation {
@@ -472,13 +500,13 @@ input UpdateAnswerInput {
   description: String
   guidance: String
   label: String
-  secondaryLabel: String 
+  secondaryLabel: String
   qCode: String
   type: AnswerType
   mandatory: Boolean @deprecated(reason: "Use \`properties\` instead.")
   properties: JSON
 }
- 
+
 input DeleteAnswerInput {
   id: ID!
 }
@@ -621,6 +649,7 @@ input UpdateValidationRuleInput {
   id: ID!
   minValueInput:  UpdateMinValueInput
   maxValueInput:  UpdateMaxValueInput
+  earliestDateInput: UpdateEarliestDateInput
 }
 
 input UpdateMinValueInput {
@@ -631,6 +660,17 @@ input UpdateMinValueInput {
 input UpdateMaxValueInput {
   inclusive: Boolean!
   custom: Int
+}
+
+input UpdateEarliestDateInput {
+  offset: DurationInput!
+  relativePosition: RelativePosition!
+  custom: Date
+}
+
+input DurationInput {
+  value: Int
+  unit: DurationUnit!
 }
 
 input CreateMetadataInput {
