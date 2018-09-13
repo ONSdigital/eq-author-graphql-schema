@@ -8,8 +8,8 @@ type User {
 }
 
 enum TextFormat {
-  HTML
-  Plaintext
+  HTML @deprecated(reason: "Use title or displayName instead")
+  Plaintext @deprecated(reason: "Use title or displayName instead")
 }
 
 type QuestionnaireInfo {
@@ -34,7 +34,8 @@ type Questionnaire {
 
 type Section {
   id: ID!
-  title(format: TextFormat = HTML): String!
+  title(format: TextFormat = HTML @deprecated(reason: "Use displayName instead")): String!
+  displayName: String!
   description: String @deprecated(reason: "No longer required")
   pages: [Page]
   questionnaire: Questionnaire
@@ -44,6 +45,7 @@ type Section {
 interface Page {
   id: ID!
   title: String!
+  displayName: String!
   description: String
   pageType: PageType!
   section: Section
@@ -52,7 +54,8 @@ interface Page {
 
 type QuestionPage implements Page {
   id: ID!
-  title(format: TextFormat = HTML): String!
+  title(format: TextFormat = HTML @deprecated(reason: "Use displayName instead")): String!
+  displayName: String!
   description: String!
   guidance: String
   pageType: PageType!
@@ -64,6 +67,7 @@ type QuestionPage implements Page {
 
 interface Answer {
   id: ID!
+  displayName: String!
   description: String
   guidance: String
   qCode: String
@@ -76,6 +80,7 @@ interface Answer {
 
 type BasicAnswer implements Answer {
   id: ID!
+  displayName: String!
   description: String
   guidance: String
   qCode: String
@@ -90,6 +95,7 @@ type BasicAnswer implements Answer {
 
 type MultipleChoiceAnswer implements Answer {
   id: ID!
+  displayName: String!
   description: String
   guidance: String
   qCode: String
@@ -105,6 +111,7 @@ type MultipleChoiceAnswer implements Answer {
 
 type CompositeAnswer implements Answer {
   id: ID!
+  displayName: String!
   description: String
   guidance: String
   qCode: String
@@ -118,6 +125,7 @@ type CompositeAnswer implements Answer {
 
 type Option {
   id: ID!
+  displayName: String!
   label: String
   description: String
   value: String
