@@ -204,6 +204,7 @@ type NumberValidation {
 
 type DateValidation {
   earliestDate: EarliestDateValidationRule!
+  latestDate: LatestDateValidationRule!
 }
 
 interface ValidationRule {
@@ -226,6 +227,14 @@ type MaxValueValidationRule implements ValidationRule {
 }
 
 type EarliestDateValidationRule implements ValidationRule {
+  id: ID!
+  enabled: Boolean!
+  offset: Duration!
+  relativePosition: RelativePosition!
+  custom: Date
+}
+
+type LatestDateValidationRule implements ValidationRule {
   id: ID!
   enabled: Boolean!
   offset: Duration!
@@ -658,6 +667,7 @@ input UpdateValidationRuleInput {
   minValueInput:  UpdateMinValueInput
   maxValueInput:  UpdateMaxValueInput
   earliestDateInput: UpdateEarliestDateInput
+  latestDateInput: UpdateLatestDateInput
 }
 
 input UpdateMinValueInput {
@@ -671,6 +681,12 @@ input UpdateMaxValueInput {
 }
 
 input UpdateEarliestDateInput {
+  offset: DurationInput!
+  relativePosition: RelativePosition!
+  custom: Date
+}
+
+input UpdateLatestDateInput {
   offset: DurationInput!
   relativePosition: RelativePosition!
   custom: Date
