@@ -35,6 +35,7 @@ type Questionnaire {
 type Section {
   id: ID!
   title(format: TextFormat = HTML @deprecated(reason: "Use displayName instead")): String!
+  alias: String
   displayName: String!
   description: String @deprecated(reason: "No longer required")
   pages: [Page]
@@ -428,6 +429,7 @@ input DuplicateQuestionnaireInput {
 
 input CreateSectionInput {
   title: String!
+  alias: String
   description: String @deprecated(reason: "No longer required")
   questionnaireId: ID!
   position: Int
@@ -436,6 +438,7 @@ input CreateSectionInput {
 input UpdateSectionInput {
   id: ID!
   title: String
+  alias: String
   description: String @deprecated(reason: "No longer required")
 }
 
