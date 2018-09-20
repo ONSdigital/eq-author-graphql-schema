@@ -46,6 +46,7 @@ type Section {
 interface Page {
   id: ID!
   title: String!
+  alias: String
   displayName: String!
   description: String
   pageType: PageType!
@@ -56,6 +57,7 @@ interface Page {
 type QuestionPage implements Page {
   id: ID!
   title(format: TextFormat = HTML @deprecated(reason: "Use displayName instead")): String!
+  alias: String
   displayName: String!
   description: String!
   guidance: String
@@ -483,6 +485,7 @@ input DuplicatePageInput {
 
 input CreateQuestionPageInput {
   title: String!
+  alias: String
   description: String
   guidance: String
   sectionId: ID!
@@ -491,6 +494,7 @@ input CreateQuestionPageInput {
 
 input UpdateQuestionPageInput {
   id: ID!
+  alias: String
   title: String
   description: String
   guidance: String
