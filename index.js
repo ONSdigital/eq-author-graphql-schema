@@ -12,6 +12,10 @@ enum TextFormat {
   Plaintext @deprecated(reason: "Use title or displayName instead")
 }
 
+type LaunchResult {
+  location: String!
+}
+
 type QuestionnaireInfo {
   totalSectionCount: Int!
 }
@@ -331,6 +335,7 @@ enum Language {
 }
 
 type Query {
+  launch(id: ID!): LaunchResult!
   questionnaires: [Questionnaire]
   questionnaire(id: ID!): Questionnaire
   section(id: ID!): Section
