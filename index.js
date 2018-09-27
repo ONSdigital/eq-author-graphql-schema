@@ -1,7 +1,10 @@
 module.exports = `
+
 scalar Date
 
 scalar JSON
+
+directive @deprecated(reason: String) on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION |ENUM_VALUE | FIELD_DEFINITION
 
 type User {
   name: String!
