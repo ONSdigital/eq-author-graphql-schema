@@ -311,6 +311,7 @@ type Metadata {
     regionValue: Region
     languageValue: Language
     textValue: String
+    displayName: String!
 }
 
 enum MetadataType {
