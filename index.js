@@ -37,7 +37,7 @@ type Questionnaire {
 
 type Section {
   id: ID!
-  title: String!
+  title(format: TextFormat = HTML @deprecated(reason: "Use displayName instead")): String!
   alias: String
   displayName: String!
   description: String @deprecated(reason: "No longer required")
@@ -59,7 +59,7 @@ interface Page {
 
 type QuestionPage implements Page {
   id: ID!
-  title: String!
+  title(format: TextFormat = HTML @deprecated(reason: "Use displayName instead")): String!
   alias: String
   displayName: String!
   description: String!
@@ -436,6 +436,7 @@ input DuplicateQuestionnaireInput {
 input CreateSectionInput {
   title: String!
   alias: String
+  description: String @deprecated(reason: "No longer required")
   questionnaireId: ID!
   position: Int
 }
@@ -443,6 +444,7 @@ input CreateSectionInput {
 input UpdateSectionInput {
   id: ID!
   title: String
+  description: String @deprecated(reason: "No longer required")
   alias: String
 }
 
@@ -517,6 +519,7 @@ input CreateAnswerInput {
   secondaryLabel: String
   qCode: String
   type: AnswerType!
+  mandatory: Boolean @deprecated(reason: "Use \`properties\` instead.")
   questionPageId: ID!
 }
 
@@ -528,6 +531,7 @@ input UpdateAnswerInput {
   secondaryLabel: String
   qCode: String
   type: AnswerType
+  mandatory: Boolean @deprecated(reason: "Use \`properties\` instead.")
   properties: JSON
 }
 
