@@ -19,6 +19,18 @@ type QuestionnaireInfo {
   totalSectionCount: Int!
 }
 
+enum ConditionEnum {
+  AND
+  OR
+}
+
+input Filter {
+  condition: ConditionEnum!
+  field: String!
+  operator: String!
+  comparator: String!
+}
+
 type Questionnaire {
   id: ID!
   title: String
@@ -29,7 +41,7 @@ type Questionnaire {
   surveyId: String
   createdAt: Date
   createdBy: User!
-  sections: [Section]
+  sections(filter: [Filter]): [Section]
   summary: Boolean
   questionnaireInfo: QuestionnaireInfo
   metadata: [Metadata!]!
@@ -41,7 +53,7 @@ type Section {
   alias: String
   displayName: String!
   description: String @deprecated(reason: "No longer required")
-  pages: [Page]
+  pages(filter: [Filter]): [Page]
   questionnaire: Questionnaire
   position: Int!
 }
@@ -65,7 +77,7 @@ type QuestionPage implements Page {
   description: String!
   guidance: String
   pageType: PageType!
-  answers: [Answer]
+  answers(filter: [Filter]): [Answer]
   section: Section
   position: Int!
   routingRuleSet: RoutingRuleSet
