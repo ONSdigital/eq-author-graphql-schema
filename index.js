@@ -199,7 +199,12 @@ type IDArrayValue {
   value: [ID]
 }
 
-union RoutingConditionValue = IDArrayValue
+type NumberValue {
+  id: ID!
+  numberValue: Int 
+}
+
+union RoutingConditionValue = IDArrayValue | NumberValue
 
 union ValidationType = NumberValidation | DateValidation
 
@@ -278,6 +283,11 @@ enum RoutingOperation {
 
 enum RoutingComparator {
   Equal
+  NotEqual
+  GreaterThan
+  LessThan
+  GreaterOrEqual
+  LessOrEqual
 }
 
 enum PageType {
@@ -399,6 +409,8 @@ type Mutation {
   updateRoutingCondition(input: UpdateRoutingConditionInput!): RoutingCondition
   deleteRoutingCondition(input: DeleteRoutingConditionInput!): RoutingCondition
   toggleConditionOption(input: ToggleConditionOptionInput!): RoutingConditionValue
+  createConditionValue(input: CreateConditionValueInput!): RoutingConditionValue
+  updateConditionValue(input: UpdateConditionValueInput!): RoutingConditionValue
   toggleValidationRule(input: ToggleValidationRuleInput!): ValidationRule!
   updateValidationRule(input: UpdateValidationRuleInput!): ValidationRule!
   createMetadata(input: CreateMetadataInput!): Metadata!
@@ -647,6 +659,7 @@ input CreateRoutingConditionInput {
 
 input UpdateRoutingConditionInput {
   id: ID!
+  comparator: RoutingComparator
   questionPageId: ID!
   answerId: ID
 }
@@ -659,6 +672,15 @@ input ToggleConditionOptionInput {
   optionId: ID
   conditionId: ID!
   checked: Boolean!
+}
+
+input CreateConditionValueInput {
+  conditionId: ID!
+}
+
+input UpdateConditionValueInput {
+  id: ID!
+  customNumber: Int
 }
 
 input LogicalDestinationInput {
