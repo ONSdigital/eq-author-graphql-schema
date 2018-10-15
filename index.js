@@ -203,6 +203,11 @@ union RoutingConditionValue = IDArrayValue
 
 union ValidationType = NumberValidation | DateValidation
 
+enum ValidationRuleEntityType {
+  Custom
+  PreviousAnswer
+}
+
 type NumberValidation {
   minValue: MinValueValidationRule!
   maxValue: MaxValueValidationRule!
@@ -230,6 +235,8 @@ type MaxValueValidationRule implements ValidationRule {
   enabled: Boolean!
   inclusive: Boolean!
   custom: Int
+  previousAnswer: BasicAnswer
+  entityType: ValidationRuleEntityType
 }
 
 type EarliestDateValidationRule implements ValidationRule {
@@ -689,6 +696,8 @@ input UpdateMinValueInput {
 input UpdateMaxValueInput {
   inclusive: Boolean!
   custom: Int
+  entityType: ValidationRuleEntityType
+  previousAnswer: ID
 }
 
 input UpdateEarliestDateInput {
