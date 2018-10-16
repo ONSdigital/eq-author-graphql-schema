@@ -33,6 +33,7 @@ type Questionnaire {
   summary: Boolean
   questionnaireInfo: QuestionnaireInfo
   metadata: [Metadata!]!
+  questionnaires: [Questionnaire!]!
 }
 
 type Section {
