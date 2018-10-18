@@ -250,6 +250,8 @@ type EarliestDateValidationRule implements ValidationRule {
   offset: Duration!
   relativePosition: RelativePosition!
   custom: Date
+  previousAnswer: BasicAnswer
+  entityType: ValidationRuleEntityType
 }
 
 type LatestDateValidationRule implements ValidationRule {
@@ -258,6 +260,8 @@ type LatestDateValidationRule implements ValidationRule {
   offset: Duration!
   relativePosition: RelativePosition!
   custom: Date
+  previousAnswer: BasicAnswer
+  entityType: ValidationRuleEntityType
 }
 
 type Duration {
@@ -725,13 +729,17 @@ input UpdateMaxValueInput {
 input UpdateEarliestDateInput {
   offset: DurationInput!
   relativePosition: RelativePosition!
+  entityType: ValidationRuleEntityType
   custom: Date
+  previousAnswer: ID
 }
 
 input UpdateLatestDateInput {
   offset: DurationInput!
   relativePosition: RelativePosition!
+  entityType: ValidationRuleEntityType
   custom: Date
+  previousAnswer: ID
 }
 
 input DurationInput {
