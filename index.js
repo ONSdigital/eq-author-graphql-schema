@@ -217,6 +217,7 @@ union ValidationType = NumberValidation | DateValidation
 enum ValidationRuleEntityType {
   Custom
   PreviousAnswer
+  Metadata
 }
 
 type NumberValidation {
@@ -257,6 +258,7 @@ type EarliestDateValidationRule implements ValidationRule {
   relativePosition: RelativePosition!
   custom: Date
   previousAnswer: BasicAnswer
+  metadata: Metadata
   entityType: ValidationRuleEntityType
 }
 
@@ -267,6 +269,7 @@ type LatestDateValidationRule implements ValidationRule {
   relativePosition: RelativePosition!
   custom: Date
   previousAnswer: BasicAnswer
+  metadata: Metadata
   entityType: ValidationRuleEntityType
 }
 
@@ -762,6 +765,7 @@ input UpdateEarliestDateInput {
   entityType: ValidationRuleEntityType
   custom: Date
   previousAnswer: ID
+  metadata: ID
 }
 
 input UpdateLatestDateInput {
@@ -770,6 +774,7 @@ input UpdateLatestDateInput {
   entityType: ValidationRuleEntityType
   custom: Date
   previousAnswer: ID
+  metadata: ID
 }
 
 input DurationInput {
