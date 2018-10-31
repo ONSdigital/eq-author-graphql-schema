@@ -44,12 +44,15 @@ type Section {
   pages: [Page]
   questionnaire: Questionnaire
   position: Int!
-  introduction: Introduction
+  introductionTitle: String
+  introductionContent: String
+  introductionEnabled: Boolean!
+  introduction: Introduction @deprecated(reason: "Use Section fields instead")
 }
 
 type Introduction {
-  title: String
-  content: String
+  title: String @deprecated(reason: "Use Section fields instead")
+  content: String @deprecated(reason: "Use Section fields instead")
 }
 
 interface Page {
@@ -482,6 +485,9 @@ input UpdateSectionInput {
   title: String
   alias: String
   description: String @deprecated(reason: "No longer required")
+  introductionTitle: String
+  introductionContent: String
+  introductionEnabled: Boolean
 }
 
 input DeleteSectionInput {
@@ -498,23 +504,23 @@ input DuplicateSectionInput {
 }
 
 input CreateIntroductionInput {
-  sectionId: ID!
-  title: String
-  content: String
+  sectionId: ID! @deprecated(reason: "Use UpdateSectionInput instead")
+  title: String @deprecated(reason: "Use UpdateSectionInput instead")
+  content: String @deprecated(reason: "Use UpdateSectionInput instead")
 }
 
 input UpdateIntroductionInput {
-  sectionId: ID!
-  title: String
-  content: String
+  sectionId: ID! @deprecated(reason: "Use UpdateSectionInput instead")
+  title: String @deprecated(reason: "Use UpdateSectionInput instead")
+  content: String @deprecated(reason: "Use UpdateSectionInput instead")
 }
 
 input DeleteIntroductionInput {
-  sectionId: ID!
+  sectionId: ID! @deprecated(reason: "Use UpdateSectionInput instead")
 }
 
 input UndeleteIntroductionInput {
-  sectionId: ID!
+  sectionId: ID! @deprecated(reason: "Use UpdateSectionInput instead")
 }
 
 input CreatePageInput {
