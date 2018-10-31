@@ -44,13 +44,11 @@ type Section {
   pages: [Page]
   questionnaire: Questionnaire
   position: Int!
-  introduction: Introduction
+  introductionTitle: String
+  introductionContent: String
+  introductionEnabled: Boolean!
 }
 
-type Introduction {
-  title: String
-  content: String
-}
 
 interface Page {
   id: ID!
@@ -429,10 +427,6 @@ type Mutation {
   createMetadata(input: CreateMetadataInput!): Metadata!
   updateMetadata(input: UpdateMetadataInput!): Metadata!
   deleteMetadata(input: DeleteMetadataInput!): Metadata!
-  createIntroduction(input: CreateIntroductionInput!): Introduction!
-  updateIntroduction(input: UpdateIntroductionInput!): Introduction!
-  deleteIntroduction(input: DeleteIntroductionInput!): Introduction!
-  undeleteIntroduction(input: UndeleteIntroductionInput!): Introduction!
 }
 
 input CreateQuestionnaireInput {
@@ -482,6 +476,9 @@ input UpdateSectionInput {
   title: String
   alias: String
   description: String @deprecated(reason: "No longer required")
+  introductionTitle: String
+  introductionContent: String
+  introductionEnabled: Boolean
 }
 
 input DeleteSectionInput {
@@ -495,26 +492,6 @@ input UndeleteSectionInput {
 input DuplicateSectionInput {
   id: ID!
   position: Int!
-}
-
-input CreateIntroductionInput {
-  sectionId: ID!
-  title: String
-  content: String
-}
-
-input UpdateIntroductionInput {
-  sectionId: ID!
-  title: String
-  content: String
-}
-
-input DeleteIntroductionInput {
-  sectionId: ID!
-}
-
-input UndeleteIntroductionInput {
-  sectionId: ID!
 }
 
 input CreatePageInput {
