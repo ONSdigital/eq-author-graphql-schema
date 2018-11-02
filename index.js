@@ -218,6 +218,7 @@ enum ValidationRuleEntityType {
   Custom
   PreviousAnswer
   Metadata
+  Now
 }
 
 type NumberValidation {
