@@ -468,6 +468,7 @@ input UndeleteQuestionnaireInput {
 
 input DuplicateQuestionnaireInput {
   id: ID!
+  createdBy: String!
 }
 
 input CreateSectionInput {
