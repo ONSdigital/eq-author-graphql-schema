@@ -47,12 +47,6 @@ type Section {
   introductionTitle: String
   introductionContent: String
   introductionEnabled: Boolean!
-  introduction: Introduction @deprecated(reason: "Use Section fields instead")
-}
-
-type Introduction {
-  title: String @deprecated(reason: "Use Section fields instead")
-  content: String @deprecated(reason: "Use Section fields instead")
 }
 
 interface Page {
@@ -432,10 +426,6 @@ type Mutation {
   createMetadata(input: CreateMetadataInput!): Metadata!
   updateMetadata(input: UpdateMetadataInput!): Metadata!
   deleteMetadata(input: DeleteMetadataInput!): Metadata!
-  createIntroduction(input: CreateIntroductionInput!): Introduction!
-  updateIntroduction(input: UpdateIntroductionInput!): Introduction!
-  deleteIntroduction(input: DeleteIntroductionInput!): Introduction!
-  undeleteIntroduction(input: UndeleteIntroductionInput!): Introduction!
 }
 
 input CreateQuestionnaireInput {
@@ -501,26 +491,6 @@ input UndeleteSectionInput {
 input DuplicateSectionInput {
   id: ID!
   position: Int!
-}
-
-input CreateIntroductionInput {
-  sectionId: ID! @deprecated(reason: "Use UpdateSectionInput instead")
-  title: String @deprecated(reason: "Use UpdateSectionInput instead")
-  content: String @deprecated(reason: "Use UpdateSectionInput instead")
-}
-
-input UpdateIntroductionInput {
-  sectionId: ID! @deprecated(reason: "Use UpdateSectionInput instead")
-  title: String @deprecated(reason: "Use UpdateSectionInput instead")
-  content: String @deprecated(reason: "Use UpdateSectionInput instead")
-}
-
-input DeleteIntroductionInput {
-  sectionId: ID! @deprecated(reason: "Use UpdateSectionInput instead")
-}
-
-input UndeleteIntroductionInput {
-  sectionId: ID! @deprecated(reason: "Use UpdateSectionInput instead")
 }
 
 input CreatePageInput {
