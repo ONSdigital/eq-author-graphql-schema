@@ -215,6 +215,7 @@ enum ValidationRuleEntityType {
   Custom
   PreviousAnswer
   Metadata
+  Now
 }
 
 type NumberValidation {
@@ -460,6 +461,7 @@ input UndeleteQuestionnaireInput {
 
 input DuplicateQuestionnaireInput {
   id: ID!
+  createdBy: String!
 }
 
 input CreateSectionInput {
