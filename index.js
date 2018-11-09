@@ -10,11 +10,6 @@ type User {
   name: String!
 }
 
-enum TextFormat {
-  HTML @deprecated(reason: "Use title or displayName instead")
-  Plaintext @deprecated(reason: "Use title or displayName instead")
-}
-
 type QuestionnaireInfo {
   totalSectionCount: Int!
 }
@@ -37,10 +32,9 @@ type Questionnaire {
 
 type Section {
   id: ID!
-  title(format: TextFormat = HTML @deprecated(reason: "Use displayName instead")): String!
+  title: String!
   alias: String
   displayName: String!
-  description: String @deprecated(reason: "No longer required")
   pages: [Page]
   questionnaire: Questionnaire
   position: Int!
@@ -62,7 +56,7 @@ interface Page {
 
 type QuestionPage implements Page {
   id: ID!
-  title(format: TextFormat = HTML @deprecated(reason: "Use displayName instead")): String!
+  title: String!
   alias: String
   displayName: String!
   description: String!
@@ -82,7 +76,6 @@ interface Answer {
   qCode: String
   label: String
   type: AnswerType!
-  mandatory: Boolean @deprecated(reason: "Use \`properties\` instead.")
   page: QuestionPage
   properties: JSON
 }
@@ -96,7 +89,6 @@ type BasicAnswer implements Answer {
   label: String
   secondaryLabel: String
   type: AnswerType!
-  mandatory: Boolean @deprecated(reason: "Use \`properties\` instead.")
   page: QuestionPage
   properties: JSON
   validation: ValidationType
@@ -110,7 +102,6 @@ type MultipleChoiceAnswer implements Answer {
   qCode: String
   label: String
   type: AnswerType!
-  mandatory: Boolean @deprecated(reason: "Use \`properties\` instead.")
   options: [Option]
   other: OptionWithAnswer
   mutuallyExclusiveOption: Option
@@ -126,7 +117,6 @@ type CompositeAnswer implements Answer {
   qCode: String
   label: String
   type: AnswerType!
-  mandatory: Boolean @deprecated(reason: "Use \`properties\` instead.")
   page: QuestionPage
   childAnswers: [BasicAnswer]!
   properties: JSON
@@ -467,7 +457,6 @@ input DuplicateQuestionnaireInput {
 input CreateSectionInput {
   title: String!
   alias: String
-  description: String @deprecated(reason: "No longer required")
   questionnaireId: ID!
   position: Int
 }
@@ -476,7 +465,6 @@ input UpdateSectionInput {
   id: ID!
   title: String
   alias: String
-  description: String @deprecated(reason: "No longer required")
   introductionTitle: String
   introductionContent: String
   introductionEnabled: Boolean
@@ -553,7 +541,6 @@ input CreateAnswerInput {
   secondaryLabel: String
   qCode: String
   type: AnswerType!
-  mandatory: Boolean @deprecated(reason: "Use \`properties\` instead.")
   questionPageId: ID!
 }
 
@@ -565,7 +552,6 @@ input UpdateAnswerInput {
   secondaryLabel: String
   qCode: String
   type: AnswerType
-  mandatory: Boolean @deprecated(reason: "Use \`properties\` instead.")
   properties: JSON
 }
 
