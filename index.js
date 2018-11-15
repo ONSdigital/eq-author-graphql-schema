@@ -41,6 +41,8 @@ type Section {
   introductionTitle: String
   introductionContent: String
   introductionEnabled: Boolean!
+  availablePipingAnswers: [Answer!]!
+  availablePipingMetadata: [Metadata!]!
 }
 
 interface Page {
@@ -66,6 +68,8 @@ type QuestionPage implements Page {
   section: Section
   position: Int!
   routingRuleSet: RoutingRuleSet
+  availablePipingAnswers: [Answer!]!
+  availablePipingMetadata: [Metadata!]!
 }
 
 interface Answer {
@@ -237,6 +241,7 @@ type MaxValueValidationRule implements ValidationRule {
   custom: Int
   previousAnswer: BasicAnswer
   entityType: ValidationRuleEntityType
+  availablePreviousAnswers: [Answer!]!
 }
 
 type EarliestDateValidationRule implements ValidationRule {
@@ -248,6 +253,8 @@ type EarliestDateValidationRule implements ValidationRule {
   previousAnswer: BasicAnswer
   metadata: Metadata
   entityType: ValidationRuleEntityType
+  availablePreviousAnswers: [Answer!]!
+  availableMetadata: [Metadata!]!
 }
 
 type LatestDateValidationRule implements ValidationRule {
@@ -259,6 +266,8 @@ type LatestDateValidationRule implements ValidationRule {
   previousAnswer: BasicAnswer
   metadata: Metadata
   entityType: ValidationRuleEntityType
+  availablePreviousAnswers: [Answer!]!
+  availableMetadata: [Metadata!]!
 }
 
 type Duration {
